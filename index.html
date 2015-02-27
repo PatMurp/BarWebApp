@@ -1,25 +1,41 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="barApp">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Home</title>
+		<title>BarWebApp</title>
 		<link rel="stylesheet" type="text/css" href="css/foundation.min.css">
 		<script src="js/modernizr.js"></script>
 	</head>
 	<body>
+		<!-- Foundation CSS navbar -->
+		<div class="sticky">
+	   <nav class="top-bar" data-topbar>
+	     <ul class="title-area">
+	       <li class="name">
+	         <h1><a href="/">Murphys Bar</a></h1>
+	       </li>
+	       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	     </ul>
+	     <section class="top-bar-section">
+	       <ul class="right">
+	         <li class="divider"></li>
+	         <li><a href="#/home">Home</a></li>
+	         <li class="divider"></li>
+	         <li><a href="#/menu">Food Menu</a></li>
+	         <li class="divider"></li>
+	         <li><a href="#/events">Events Guide</a></li>
+	       </ul>
+	     </section>
+	  </nav>
+	 </div>
 		<div class="row">
-			<h1>Welcome to Angular test page</h1>
-		
-			<div>
-	      <p><input type="text" ng-model="yourName" placeholder="Enter a name here"></p>
-	      <h1>Hello, {{ yourName }} !</h1>
-	    </div>
+			<div ng-view></div>
 	  </div>
 		<script src="js/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
 		<script src="lib/angular.min.js"></script>
 		<script src="lib/angular-route.min.js"></script>
-		<script src="app.js"></script>
+		<script src="js/app.js"></script>
 	</body>
 </html>
