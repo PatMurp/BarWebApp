@@ -1,0 +1,15 @@
+
+
+footer {
+	background: ghostwhite;
+	padding: 2em 0;
+	color: #999;
+	border-top: 1px solid #ccc;
+}
+footer p {
+	font-size: 0.8em;
+}
+
+#footPadding {
+	padding-bottom: 25px;
+}
