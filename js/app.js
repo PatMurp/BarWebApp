@@ -14,6 +14,10 @@ app.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'partials/events.html',
 			controller: 'EventsCtrl'
 		})
+		.when('/gallery', {
+			templateUrl: 'partials/gallery.html',
+			controller: 'GalleryCtrl'
+		})
 		.otherwise({
 			redirectTo: '/home'
 		})
@@ -30,3 +34,30 @@ app.controller('MenuCtrl', function($scope) {
 app.controller('EventsCtrl', function($scope) {
 
 })
+
+app.controller('GalleryCtrl', function($scope) {
+
+})
+
+
+
+
+// add active class to nav bar based on url
+angular.module('barApp').directive('classOnActiveLink', [function() {
+return {
+    link: function(scope, element, attrs) {
+
+        var anchorLink = element.children()[0].getAttribute('ng-href') || element.children()[0].getAttribute('href');
+        anchorLink = anchorLink.replace(/^#/, '');
+
+        scope.$on("$routeChangeSuccess", function (event, current) {
+            if (current.$$route.originalPath == anchorLink) {
+                element.addClass(attrs.classOnActiveLink);
+            }
+            else {
+                element.removeClass(attrs.classOnActiveLink);
+            }
+        });
+    }
+	};
+}]);

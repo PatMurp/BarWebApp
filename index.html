@@ -13,18 +13,20 @@
 	   <nav class="top-bar" data-topbar>
 	     <ul class="title-area">
 	       <li class="name">
-	         <h1><a href="/">Murphys Bar</a></h1>
+	         <h1><a href="#/home">Murphys Bar</a></h1>
 	       </li>
 	       <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 	     </ul>
 	     <section class="top-bar-section">
 	       <ul class="right">
+	         <li class="divider"></li><!-- use directive to set active -->
+	         <li class-on-active-link="active"><a href="#/home">Home</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/home">Home</a></li>
+	         <li class-on-active-link="active"><a href="#/menu">Food Menu</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/menu">Food Menu</a></li>
+	         <li class-on-active-link="active"><a href="#/events">Events Guide</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/events">Events Guide</a></li>
+	         <li class-on-active-link="active"><a href="#/gallery">Photo Gallery</a></li>
 	       </ul>
 	     </section>
 	  </nav>
@@ -37,5 +39,9 @@
 		<script src="lib/angular.min.js"></script>
 		<script src="lib/angular-route.min.js"></script>
 		<script src="js/app.js"></script>
+		<!-- initialize foundation javascipt -->
+		<script>
+      $(document).foundation();
+    </script>
 	</body>
 </html>
