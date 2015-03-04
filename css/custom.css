@@ -1,5 +1,3 @@
-
-
 footer {
 	background: ghostwhite;
 	padding: 2em 0;
@@ -10,6 +8,15 @@ footer p {
 	font-size: 0.8em;
 }
 
+h4 {
+	color: #b48242;
+}
+
+
 #footPadding {
 	padding-bottom: 25px;
+}
+
+#menu-style {
+	border-top: 1px dashed #dcd1c7;
 }
