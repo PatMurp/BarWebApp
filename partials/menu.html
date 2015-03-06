@@ -1,54 +1,57 @@
 <h2 class="text-center">Murphy's Bar Food. Come hungry. Leave happy.</h2>
 
-<!-- starters and mains -->
+<!-- display starters -->
 <div class="row">
 	<div class="medium-6 columns">
 		<h3 class="text-center">Starter's</h3>
-		<div ng-repeat="starter in starters">
+		<div ng-repeat="item in foodMenus[0].starters">
 			<div id="menu-style">
-				<h4>{{starter.name}}</h4>
-				<p>{{starter.description}} <br>
-					<strong>{{starter.price}}</strong>
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
 				</p>
 			</div>
 		</div>
 	</div>
 
+	<!-- display mains -->
 	<div class="medium-6 columns">
 		<h3 class="text-center">Main's</h3>
-		<div ng-repeat="mainMenu in mains">
+		<div ng-repeat="item in foodMenus[0].mains">
 			<div id="menu-style">
-				<h4>{{mainMenu.name}}</h4>
-				<p>{{mainMenu.description}} <br>
-					<strong>{{mainMenu.price}}</strong>
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
 				</p>
 			</div>
 		</div>
 	</div>
 </div><!-- row end -->
 
+<!-- display deserts -->
 <div class="row">
 	<div class="medium-6 columns">
 		<h3 class="text-center">Desserts's</h3>
-		<div ng-repeat="desert in deserts">
+		<div ng-repeat="item in foodMenus[0].deserts">
 			<div id="menu-style">
-				<h4>{{desert.name}}</h4>
-				<p>{{desert.description}} <br>
-					<strong>{{desert.price}}</strong>
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
 				</p>
 			</div>
 		</div>
 	</div>
 
+	<!-- display wines -->
 	<div class="medium-6 columns">
 		<h3 class="text-center">House Wine</h3>
-		<div ng-repeat="wine in wines">
+		<div ng-repeat="item in foodMenus[0].wines">
 			<div id="menu-style">
-				<h4>{{wine.name}}</h4>
-				<p>{{wine.description}} <br>
-					<strong>{{wine.price}}</strong>
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
 				</p>
 			</div>
 		</div>
 	</div>
-</div>
+</div><!-- row end -->

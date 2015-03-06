@@ -1,0 +1,60 @@
+<h1>Edit menu</h1>
+<div class="row">
+	<div class="medium-6 columns">
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Name</th>
+		      <th>Description</th>
+		      <th>Price</th>
+		      <th></th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tbody ng-repeat="item in foodMenus[0].starters" ng-switch="starters.state">
+
+		  	<!-- edit mode template -->
+		  	<form ng-submit="updateMenu()">
+		  	  <tr ng-switch-when="edit">
+			      <td>
+			      	<input type="text" class="small-1 columns" ng=model="starters.name">
+			      	</td>
+			      <td></td>
+			      <td></td>
+			      <td>
+			      	<input type="button" class="button success tiny" ng-click="saveStarters(starters)" value="Save">
+			      </td>
+		    	</tr>
+		    </form>
+
+
+		  	<!-- Normal mode template -->
+		    <tr ng-switch-default>
+		      <td>{{item.name}}</td>
+		      <td>{{item.description}}</td>
+		      <td>{{item.price}}</td>
+		      <td>
+		      	<input type="button" class="button tiny" ng-click="updateStarters(starters)" value="Edit">
+		      </td>
+		    </tr>
+
+		  </tbody>
+		</table>
+
+
+	</div>
+
+	<!-- styled mode template -->
+	<div class="medium-6 columns">
+		<div ng-repeat="item in foodMenus[0].starters">
+			<div id="menu-style">
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
+				</p>
+			</div>
+		</div>
+	</div>
+
+
+</div>
