@@ -1,4 +1,4 @@
-var app = angular.module("barApp", ['ngRoute','xeditable'])
+var app = angular.module("barApp", ['ngRoute','xeditable', 'angAccordion'])
 
 
 

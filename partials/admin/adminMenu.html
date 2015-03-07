@@ -1,32 +1,78 @@
+	<ang-accordion one-at-a-time="true"><br>
+	<!-- starters accordion open by default -->
+	<collapsible-item title="Edit Starters" initially-open="true">
+	<div>
+		<div class="row">
+			<div class="medium-12 columns">
+				<table>
+					<caption>Edit starter menu</caption>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="item in foodMenus[0].starters">
+
+						<!-- Edit starters -->
+						<tr>
+							<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
+							<td><a href="#" editable-text="item.description">{{item.description}}</a></td>
+							<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- styled starters -->
+		<div class="row">
+			<div class="medium-6 medium-offset-2 columns">
+				<caption>Styled starter menu</caption>
+				<div ng-repeat="item in foodMenus[0].starters">
+					<div id="menu-style">
+						<h4>{{item.name}}</h4>
+						<p id="menu-paragraph">{{item.description}} <br>
+							<strong>{{item.price}}</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- mains accordion -->
+</collapsible-item>
+<collapsible-item title="Edit Mains">
 <div class="row">
 	<div class="medium-12 columns">
 		<table>
-			<caption>Edit starter menu</caption>
-		  <thead>
-		    <tr>
-		      <th>Name</th>
-		      <th>Description</th>
-		      <th>Price</th>
-		    </tr>
-		  </thead>
-		  <tbody ng-repeat="item in foodMenus[0].starters">
+			<caption>Edit mains menu</caption>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="item in foodMenus[0].mains">
 
-		  	<!-- Edit starters -->
-		    <tr>
-		      <td><a href="#" editable-text="item.name">{{item.name}}</a></td>
-		      <td><a href="#" editable-text="item.description">{{item.description}}</a></td>
-		      <td><a href="#" editable-text="item.price">{{item.price}}</a></td>
-		    </tr>
-		  </tbody>
+				<!-- Edit mains -->
+				<tr>
+					<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
+					<td><a href="#" editable-text="item.description">{{item.description}}</a></td>
+					<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 </div>
 
-<!-- styled starters -->
+<!-- styled mains -->
 <div class="row">
 	<div class="medium-6 medium-offset-2 columns">
-		<caption>Styled starter menu</caption>
-		<div ng-repeat="item in foodMenus[0].starters">
+		<caption>Styled mains menu</caption>
+		<div ng-repeat="item in foodMenus[0].mains">
 			<div id="menu-style">
 				<h4>{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
@@ -36,4 +82,97 @@
 		</div>
 	</div>
 </div>
+</collapsible-item>
+
+<!-- deserts accordion -->
+</collapsible-item>
+<collapsible-item title="Edit Deserts">
+<div class="row">
+	<div class="medium-12 columns">
+		<table>
+			<caption>Edit desert menu</caption>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="item in foodMenus[0].deserts">
+
+				<!-- Edit deserts -->
+				<tr>
+					<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
+					<td><a href="#" editable-text="item.description">{{item.description}}</a></td>
+					<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- styled deserts -->
+<div class="row">
+	<div class="medium-6 medium-offset-2 columns">
+		<caption>Styled desert menu</caption>
+		<div ng-repeat="item in foodMenus[0].deserts">
+			<div id="menu-style">
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</collapsible-item>
+
+<!-- wines accordion -->
+</collapsible-item>
+<collapsible-item title="Edit Wines">
+<div class="row">
+	<div class="medium-12 columns">
+		<table>
+			<caption>Edit wine menu</caption>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="item in foodMenus[0].wines">
+
+				<!-- Edit wines -->
+				<tr>
+					<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
+					<td><a href="#" editable-text="item.description">{{item.description}}</a></td>
+					<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- styled wines -->
+<div class="row">
+	<div class="medium-6 medium-offset-2 columns">
+		<caption>Styled wine menu</caption>
+		<div ng-repeat="item in foodMenus[0].wines">
+			<div id="menu-style">
+				<h4>{{item.name}}</h4>
+				<p id="menu-paragraph">{{item.description}} <br>
+					<strong>{{item.price}}</strong>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</collapsible-item>
+
+
+</ang-accordion>
+
+
+
 
