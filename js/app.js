@@ -1,4 +1,6 @@
-var app = angular.module("barApp", ['ngRoute'])
+var app = angular.module("barApp", ['ngRoute','xeditable'])
+
+
 
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
@@ -47,8 +49,6 @@ app.controller('GalleryCtrl', function($scope) {
 
 app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
-
-
 })
 
 app.factory('MenuFactory', function() {
@@ -99,7 +99,8 @@ app.factory('MenuFactory', function() {
 			price: '€25.00 per bottle or €5.50 per glass'
 		}]
 	}]
-	console.log(foodMenus)
+	console.log(Array.isArray(foodMenus))
+	console.log(foodMenus[0].starters[0].price)
 
 
 	factory.getMenu = function() {
