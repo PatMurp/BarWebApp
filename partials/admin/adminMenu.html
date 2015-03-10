@@ -32,7 +32,7 @@
 				<caption>Styled starter menu</caption>
 				<div ng-repeat="item in foodMenus[0].starters">
 					<div id="menu-style">
-						<h4>{{item.name}}</h4>
+						<h4 id="foodName">{{item.name}}</h4>
 						<p id="menu-paragraph">{{item.description}} <br>
 							<strong>{{item.price}}</strong>
 						</p>
@@ -74,7 +74,7 @@
 		<caption>Styled mains menu</caption>
 		<div ng-repeat="item in foodMenus[0].mains">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>
@@ -117,7 +117,7 @@
 		<caption>Styled desert menu</caption>
 		<div ng-repeat="item in foodMenus[0].deserts">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>
@@ -160,7 +160,7 @@
 		<caption>Styled wine menu</caption>
 		<div ng-repeat="item in foodMenus[0].wines">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>

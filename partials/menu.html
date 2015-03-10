@@ -3,10 +3,10 @@
 <!-- display starters -->
 <div class="row">
 	<div class="medium-6 columns">
-		<h3 class="text-center">Starter's</h3>
+		<h3 class="text-center" id="menuHeadings">Starter's</h3>
 		<div ng-repeat="item in foodMenus[0].starters">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>
@@ -16,10 +16,10 @@
 
 	<!-- display mains -->
 	<div class="medium-6 columns">
-		<h3 class="text-center">Main's</h3>
+		<h3 class="text-center" id="menuHeadings">Main's</h3>
 		<div ng-repeat="item in foodMenus[0].mains">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>
@@ -31,10 +31,10 @@
 <!-- display deserts -->
 <div class="row">
 	<div class="medium-6 columns">
-		<h3 class="text-center">Desserts's</h3>
+		<h3 class="text-center" id="menuHeadings">Desserts's</h3>
 		<div ng-repeat="item in foodMenus[0].deserts">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>
@@ -44,10 +44,10 @@
 
 	<!-- display wines -->
 	<div class="medium-6 columns">
-		<h3 class="text-center">House Wine</h3>
+		<h3 class="text-center" id="menuHeadings">House Wine</h3>
 		<div ng-repeat="item in foodMenus[0].wines">
 			<div id="menu-style">
-				<h4>{{item.name}}</h4>
+				<h4 id="foodName">{{item.name}}</h4>
 				<p id="menu-paragraph">{{item.description}} <br>
 					<strong>{{item.price}}</strong>
 				</p>
