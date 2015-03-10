@@ -1,4 +1,4 @@
-var app = angular.module("barApp", ['ngRoute','xeditable', 'angAccordion'])
+var app = angular.module("barApp", ['ngRoute', 'xeditable', 'angAccordion'])
 
 
 
@@ -38,12 +38,19 @@ app.controller('MenuCtrl', function($scope, MenuFactory) {
 
 })
 
-app.controller('EventsCtrl', function($scope, MenuFactory) {
+app.controller('EventsCtrl', function($scope, EventFactory) {
+	$scope.events = EventFactory.getEvent()
+
+	// $scope.orderByDate = function
+ //  }
 	
+
 })
 
 
 app.controller('GalleryCtrl', function($scope) {
+	$scope.date = new Date();
+
 
 })
 
@@ -99,8 +106,12 @@ app.factory('MenuFactory', function() {
 			price: '€25.00 per bottle or €5.50 per glass'
 		}]
 	}]
+
+	// testing only to be deleted !!!!
 	console.log(Array.isArray(foodMenus))
 	console.log(foodMenus[0].starters[0].price)
+	var now = new Date()
+	console.log(now)
 
 
 	factory.getMenu = function() {
@@ -110,6 +121,52 @@ app.factory('MenuFactory', function() {
 	return factory
 
 })
+
+app.factory('EventFactory', function() {
+	var factory = {};
+	var events = [{
+		date: '14-Mar-2015',
+		startTime: '9:00pm',
+		playing: "Mountain Thyme"
+	}, {
+		date: '20-Mar-2015',
+		startTime: '9:30pm',
+		playing: "Private Party"
+	}, {
+		date: '21-Mar-2015',
+		startTime: '10:00pm',
+		playing: "The Indians",
+		description: 'Irelands top showband'
+	}, {
+		date: '28-Mar-2015',
+		startTime: '9:00pm',
+		playing: "Mountain Thyme"
+	}, {
+		date: '4-Apr-2015',
+		startTime: '9:00pm',
+		playing: "Bally slashers",
+		description: 'New local band please support!!'
+	}, {
+		date: '11-Apr-2015',
+		startTime: '9:30pm',
+		playing: "Nixon",
+		description: 'Modern and classic funk, disco, rock & dance'
+	}]
+
+	factory.getEvent = function() {
+		return events
+	}
+
+	factory.orderByDate = function(item) {
+		var parts = item.date.split('-');
+		var date = new Date(parseInt(parts[2],
+												parseInt(parts[1].Month)))
+	}
+
+	return factory
+})
+
+
 
 
 
