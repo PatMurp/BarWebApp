@@ -23,16 +23,16 @@
 	     </ul>
 	     <section class="top-bar-section">
 	       <ul class="right">
-	         <li class="divider"></li><!-- use directive to set active -->
-	         <li ><a href="#/home">Home</a></li>
 	         <li class="divider"></li>
-	         <li class-on-active-link="active"><a href="#/menu">Food Menu</a></li>
+	         <li ui-sref="home" ui-sref-active="active"><a href="#/home">Home</a></li>
 	         <li class="divider"></li>
-	         <li class-on-active-link="active"><a href="#/events">Events Guide</a></li>
+	         <li ui-sref="menu" ui-sref-active="active"><a href="#/menu">Food Menu</a></li>
 	         <li class="divider"></li>
-	         <li class-on-active-link="active"><a href="#/gallery">Photo Gallery</a></li>
+	         <li ui-sref="events" ui-sref-active="active"><a href="#/events">Events Guide</a></li>
 	         <li class="divider"></li>
-	         <li class-on-active-link="active"><a href="#/adminMenu">Admin</a></li>
+	         <li ui-sref="gallery" ui-sref-active="active"><a href="#/gallery">Photo Gallery</a></li>
+	         <li class="divider"></li>
+	         <li ui-sref="adminMenu" ui-sref-active="active"><a href="#/adminMenu">Admin</a></li>
 	       </ul>
 	     </section>
 	  </nav>
@@ -52,10 +52,7 @@
 		<script src="js/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
 		<script src="lib/angular.min.js"></script>
-		<script src="lib/angular-route.min.js"></script>
-
 		<script src="lib/angular-ui-router.min.js"></script>
-
 		<script src="lib/xeditable.min.js"></script>
 		<script src="lib/ang-accordion.js"></script>
 		<script src="js/app.js"></script>
