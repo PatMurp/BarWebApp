@@ -24,7 +24,7 @@
 	     <section class="top-bar-section">
 	       <ul class="right">
 	         <li class="divider"></li><!-- use directive to set active -->
-	         <li class-on-active-link="active"><a href="#/home">Home</a></li>
+	         <li ><a href="#/home">Home</a></li>
 	         <li class="divider"></li>
 	         <li class-on-active-link="active"><a href="#/menu">Food Menu</a></li>
 	         <li class="divider"></li>
@@ -38,7 +38,7 @@
 	  </nav>
 	 </div>
 		<div class="row">
-			<div ng-view></div><!-- display view -->
+			<div ui-view></div><!-- display view -->
 	  </div>
 
 	  	<!-- footer -->
@@ -53,6 +53,9 @@
 		<script src="js/foundation.min.js"></script>
 		<script src="lib/angular.min.js"></script>
 		<script src="lib/angular-route.min.js"></script>
+
+		<script src="lib/angular-ui-router.min.js"></script>
+
 		<script src="lib/xeditable.min.js"></script>
 		<script src="lib/ang-accordion.js"></script>
 		<script src="js/app.js"></script>

@@ -1,31 +1,35 @@
-var app = angular.module("barApp", ['ngRoute', 'xeditable', 'angAccordion'])
+var app = angular.module("barApp", ['xeditable', 
+																		'angAccordion',
+																		'ui.router'])
 
+app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+	$urlRouterProvider.otherwise('/home')
 
-
-app.config(['$routeProvider', function($routeProvider) {
-	$routeProvider
-		.when('/home', {
+	$stateProvider
+		.state('home', {
+			url: '/home',
 			templateUrl: 'partials/home.html',
 			controller: 'HomePageCtrl'
 		})
-		.when('/menu', {
+		.state('menu', {
+			url: '/menu',
 			templateUrl: 'partials/menu.html',
 			controller: 'MenuCtrl'
 		})
-		.when('/events', {
+		.state('events', {
+			url: '/events',
 			templateUrl: 'partials/events.html',
 			controller: 'EventsCtrl'
 		})
-		.when('/gallery', {
+		.state('gallery', {
+			url: '/gallery',
 			templateUrl: 'partials/gallery.html',
 			controller: 'GalleryCtrl'
 		})
-		.when('/adminMenu', {
+		.state('adminMenu', {
+			url: '/adminMenu',
 			templateUrl: 'partials/admin/adminMenu.html',
 			controller: 'AdminMenuCtrl'
-		})
-		.otherwise({
-			redirectTo: '/home'
 		})
 }])
 
