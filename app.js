@@ -1,39 +1,12 @@
-var app = angular.module("barApp", ['xeditable', 
-																		'angAccordion',
-																		'ui.router'])
+var app = angular.module("barApp", ['xeditable', 'angAccordion','ui.router','ngCookies'])
+								 .config(config)
+								 .run(run);
+								
 
-var controllerId = 'login';
+// app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
+function config($stateProvider, $locationProvider, $urlRouterProvider) {
 
-function login(common, loginservice, $location, $rootScope) {
-	var getLogFn = common.logger.getLogFn;
-	var log = getLogFn(controllerId);
-	var logedIn;
-	var vm = this;
-	vm.title = 'login';
-	vm.login = function (log) {
-		loginservice.getLoginData(log.email, log.password, vm.loginsucess);
-	}
-	vm.loginsucess = function (data) {
-		if (data == null) {
-			toastr.error('Invalid username or password');
-		}
-		else {
-			sessionStorage.Id = data;
-			logedIn = data;
-			$location.path('/adminMenu');
-			$rootScope.$broadcast('logindata', data);
-		}
-	}
-	activate();
-
-	function activate () {
-		common.activateController([], controllerId)
-			.then(function () { log('Activated login View'); });
-			$rootScope.$broadcast('logindata', 0);
-	}
-}
-
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/home')
 
 	$stateProvider
@@ -60,9 +33,34 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		.state('adminMenu', {
 			url: '/adminMenu',
 			templateUrl: 'partials/admin/login.html',
-			controller: 'AdminMenuCtrl'
+			controller: 'LoginController',
+			controllerAs: 'vm'
 		})
-}])
+		.state('adminHome', {
+			url: '/',
+			templateUrl: 'partials/admin/home.html',
+			controller: 'HomeController',
+			controllerAs: 'vm'
+		})
+}
+
+run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
+function run($rootScope, $location, $cookieStore, $http) {
+    // keep user logged in after page refresh
+    $rootScope.globals = $cookieStore.get('globals') || {};
+    if ($rootScope.globals.currentUser) {
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+    }
+
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        // redirect to login page if not logged in and trying to access a restricted page
+        var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+        var loggedIn = $rootScope.globals.currentUser;
+        if (restrictedPage && !loggedIn) {
+            $location.path('/login');
+        }
+    });
+}
 
 app.controller('HomePageCtrl', function($scope) {
 
@@ -81,6 +79,8 @@ app.controller('EventsCtrl', function($scope, EventFactory) {
 	
 
 })
+
+
 
 
 app.controller('GalleryCtrl', function($scope) {
