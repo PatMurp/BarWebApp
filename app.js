@@ -2,6 +2,37 @@ var app = angular.module("barApp", ['xeditable',
 																		'angAccordion',
 																		'ui.router'])
 
+var controllerId = 'login';
+
+function login(common, loginservice, $location, $rootScope) {
+	var getLogFn = common.logger.getLogFn;
+	var log = getLogFn(controllerId);
+	var logedIn;
+	var vm = this;
+	vm.title = 'login';
+	vm.login = function (log) {
+		loginservice.getLoginData(log.email, log.password, vm.loginsucess);
+	}
+	vm.loginsucess = function (data) {
+		if (data == null) {
+			toastr.error('Invalid username or password');
+		}
+		else {
+			sessionStorage.Id = data;
+			logedIn = data;
+			$location.path('/adminMenu');
+			$rootScope.$broadcast('logindata', data);
+		}
+	}
+	activate();
+
+	function activate () {
+		common.activateController([], controllerId)
+			.then(function () { log('Activated login View'); });
+			$rootScope.$broadcast('logindata', 0);
+	}
+}
+
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/home')
 
@@ -170,5 +201,43 @@ app.factory('EventFactory', function() {
 	return factory
 })
 
+// //var serviceId = 'loginservice';
+// angular.module('barApp').factory(serviceId, ['common', loginservice]);
 
+// function loginservice(common) {
+// 	var $q = common.$q;
+
+// 	var service = {
+// 		getLoginData: getLoginData;
+// 	};
+// 	return service;
+// 	function getLoginData(email, password, success) {
+// 		var data;
+// 		if (email === 'pat' && password === 'secret') {
+// 			data = 1;
+// 		}
+// 		else 
+// 			data = null;
+// 		return success(data;)
+// 	}
+// }
+
+// +angular.module('barApp').directive('classOnActiveLink', [function() {
+// +return {
+// +    link: function(scope, element, attrs) {
+// +
+// +        var anchorLink = element.children()[0].getAttribute('ng-href') || element.children()[0].getAttribute('href');
+// +        anchorLink = anchorLink.replace(/^#/, '');
+// +
+// +        scope.$on("$routeChangeSuccess", function (event, current) {
+// +            if (current.$$route.originalPath == anchorLink) {
+// +                element.addClass(attrs.classOnActiveLink);
+// +            }
+// +            else {
+// +                element.removeClass(attrs.classOnActiveLink);
+// +            }
+// +        });
+// +    }
+// +	};
+// +}])
 
