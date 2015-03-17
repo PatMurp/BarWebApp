@@ -53,6 +53,12 @@ function config($stateProvider, $locationProvider, $urlRouterProvider) {
 			templateUrl: 'partials/admin/adminMenu.html',
 			controller: 'AdminMenuCtrl'
 		})
+		.state('adminEvents', {
+			url: '/adminEvents',
+			templateUrl: 'partials/admin/adminEvents.html',
+			controller: 'AdminEventsCtrl',
+			controllerAs: 'vm'
+		})
 }
 
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
@@ -102,6 +108,10 @@ app.controller('GalleryCtrl', function($scope) {
 
 app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
+})
+
+app.controller('AdminEventsCtrl', function($scope) {
+
 })
 
 app.factory('MenuFactory', function() {

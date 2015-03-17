@@ -1,14 +1,14 @@
 <h2 class="success">Hi {{vm.user.username}} you now have admin accesss!</h2>
-
+<h4>Please log out when finished !!</h4>
 <div class="row">
 	<div class="medium-2 columns">
-	<ul class="side-nav">
-		<h5 id="foodName">Admin Links</h5>
-	  <li><a href="#/adminLogin" class="button alert small">Logout</a></li>
-	  <li><a href="#/adminMenu">Edit Menus</a></li>
-	  <li><a href="#">Add/edit events</a></li>
-	  <li><a href="#">Link 4</a></li>
-	</ul>
+		<ul class="side-nav">
+			<h5 id="foodName">Admin Links</h5>
+		  <li><a href="#/adminLogin" class="button alert small">Logout</a></li>
+		  <li class="active"><a href="#/">Admin Home</a></li>
+		  <li><a href="#/adminMenu">Edit Menus</a></li>
+		  <li><a href="#/adminEvents">Add/edit events</a></li>
+		</ul>
 	</div>
 	<div class="medium-5 columns">
 		<table>
@@ -30,6 +30,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<a href="#/register" class="button success small border-radius-top">Add Admin User</a>
 	</div>
 	<div class="medium-5 columns"> 
 	</div>
@@ -37,5 +38,4 @@
 
 
 	
-	<!-- <p>&nbsp;</p> -->
 	
