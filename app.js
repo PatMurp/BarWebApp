@@ -30,8 +30,8 @@ function config($stateProvider, $locationProvider, $urlRouterProvider) {
 			templateUrl: 'partials/gallery.html',
 			controller: 'GalleryCtrl'
 		})
-		.state('adminMenu', {
-			url: '/adminMenu',
+		.state('adminLogin', {
+			url: '/adminLogin',
 			templateUrl: 'partials/admin/login.html',
 			controller: 'LoginController',
 			controllerAs: 'vm'
@@ -48,6 +48,11 @@ function config($stateProvider, $locationProvider, $urlRouterProvider) {
 			controller: 'RegisterController',
 			controllerAs: 'vm'
 		})
+		.state('adminMenu', {
+			url: '/adminMenu',
+			templateUrl: 'partials/admin/adminMenu.html',
+			controller: 'AdminMenuCtrl'
+		})
 }
 
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
@@ -60,10 +65,10 @@ function run($rootScope, $location, $cookieStore, $http) {
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         // redirect to login page if not logged in and trying to access a restricted page
-        var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/adminMenu']) === -1;
+        var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/adminLogin']) === -1;
         var loggedIn = $rootScope.globals.currentUser;
         if (restrictedPage && !loggedIn) {
-            $location.path('/login');
+            $location.path('/adminLogin');
         }
     });
 }
@@ -207,43 +212,7 @@ app.factory('EventFactory', function() {
 	return factory
 })
 
-// //var serviceId = 'loginservice';
-// angular.module('barApp').factory(serviceId, ['common', loginservice]);
 
-// function loginservice(common) {
-// 	var $q = common.$q;
 
-// 	var service = {
-// 		getLoginData: getLoginData;
-// 	};
-// 	return service;
-// 	function getLoginData(email, password, success) {
-// 		var data;
-// 		if (email === 'pat' && password === 'secret') {
-// 			data = 1;
-// 		}
-// 		else 
-// 			data = null;
-// 		return success(data;)
-// 	}
-// }
 
-// +angular.module('barApp').directive('classOnActiveLink', [function() {
-// +return {
-// +    link: function(scope, element, attrs) {
-// +
-// +        var anchorLink = element.children()[0].getAttribute('ng-href') || element.children()[0].getAttribute('href');
-// +        anchorLink = anchorLink.replace(/^#/, '');
-// +
-// +        scope.$on("$routeChangeSuccess", function (event, current) {
-// +            if (current.$$route.originalPath == anchorLink) {
-// +                element.addClass(attrs.classOnActiveLink);
-// +            }
-// +            else {
-// +                element.removeClass(attrs.classOnActiveLink);
-// +            }
-// +        });
-// +    }
-// +	};
-// +}])
 

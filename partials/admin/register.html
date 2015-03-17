@@ -4,14 +4,14 @@
 			<div ng-show="vm.error" class="alert-box alert radius">{{vm.error}}</div>
 			<form name="form" ng-submit="vm.register()" role="form">
 			<div class="large-12 columns text-center"><br>
-				<div ng-class="{ 'has-error': form.firstname.$dirty && form.firstname.$error.required }">
+				<div ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
 					<h3 class="text-center">Register for Admin access</h3>
-			    <input type="text" name="firstname" id="firstname" class="form-control" ng-model="vm.user.firstname" placeholder="First name:" required  />
-			    <span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="error">First name is required</span>
+			    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" placeholder="First name:" required  />
+			    <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="error">First name is required</span>
 		    </div>
-		    <div ng-class="{ 'has-error': form.lastname.$dirty && form.lastname.$error.required }">
-			    <input type="text" name="lastname" id="lastname" class="form-control" ng-model="vm.user.lastname" placeholder="Last name:" required  />
-			    <span ng-show="form.lastname.$dirty && form.lastname.$error.required" class="error">Last name is required</span>
+		    <div ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+			    <input type="text" name="lastName" id="lastName" class="form-control" ng-model="vm.user.lastName" placeholder="Last name:" required  />
+			    <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="error">Last name is required</span>
 		    </div>
 		    <div ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
 			    <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.username" placeholder="Username:" required  />
@@ -26,10 +26,9 @@
 		    class="button small border-radius-bottom" style="width: 100%">Register</button>
 		    <!-- loading animation -->
 		    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-		    <a href="#/adminMenu" class="button alert small border-radius-top">Cancel</a>
+		    <a href="#/adminLogin" class="button alert small border-radius-top">Cancel</a>
 			 </div>
 		</form>
-		
 	</div>
 </div>
 </div>
