@@ -116,6 +116,15 @@ app.controller('AdminEventsCtrl', function($scope, EventFactory) {
 		EventFactory.addEvent($scope.newEvent)
 		$scope.newEvent = {}
 	}
+
+	
+	// delete from filterted array
+	$scope.removeEvent = function(event){
+    $scope.events.splice($scope.events.indexOf(event),1);
+	}
+
+
+
 })
 
 // custom reverse array filter
@@ -229,14 +238,23 @@ app.factory('EventFactory', function() {
 			playing: gig.playing, description: gig.description })
 	}
 
-	// factory.orderByDate = function(item) {
-	// 	var parts = item.date.split('-');
-	// 	var date = new Date(parseInt(parts[2],
-	// 											parseInt(parts[1].Month)))
-	// }
-
 	return factory
 })
+
+// directive that creates a confirmation dialog for an action
+angular.module('barApp').directive('ngReallyClick', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+                var message = attrs.ngReallyMessage;
+                if (message && confirm(message)) {
+                    scope.$apply(attrs.ngReallyClick);
+                }
+            });
+        }
+    }
+}]);
 
 
 
