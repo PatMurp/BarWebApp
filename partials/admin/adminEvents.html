@@ -8,8 +8,8 @@
 		  <li class="active"><a href="#/adminEvents">Add/edit events</a></li>
 		</ul>
 	</div>
-	<div class="medium-3 columns">
-		<h4>Add new Event</h4>
+	<div class="medium-4 medium-offset-2 columns">
+		<h4 class="text-center">Add new Event</h4>
 		<form name="eventForm" id="eventForm" ng-submit="addEvent()">
 			<input type="date" ng-model="newEvent.date" placeholder="date"  name="date" required>
 			<input type="time" ng-model="newEvent.startTime" name="time" required>
@@ -18,23 +18,28 @@
 			<input type="submit" class="button small border-radius-bottom" value="Add Event" ng-disabled="eventForm.$invalid" style="width: 100%">
 		</form>
 	</div>
-	<div class="medium-7 columns">
+	<div class="medium-4 columns">
+	</div>
+</div>
+<div class="row">
+	<div class="medium-9 columns">
 		<table>
+			<caption>Edit events</caption>
 			<thead>
 				<tr>
 					<th>Date</th>
 					<th>Time</th>
-					<th>Event</th>
+					<th width="150">Event</th>
 					<th>Description</th>
 					<th></th>
 				</tr>
-			</thead>
+			</thead><!-- reverse order of events -->
 			<tbody ng-repeat="event in events | reverse"{{event.playing}}>
-				<tr>
-					<td>{{event.date | date:'dd-MMM-yyyy'}}</td>
-					<td>{{event.startTime | date: 'h:mma'}}</td>
-					<td>{{event.playing}}</td>
-					<td>{{event.description}}</td>
+				<tr><!-- enable event editing with xeditable library -->
+					<td><a href="#" editable-date="event.date">{{event.date | date:'dd-MMM-yyyy'}}</a></td>
+					<td><a href="#" editable-time="event.startTime">{{event.startTime | date: 'h:mma'}}</a></td>
+					<td><a href="#" editable-text="event.playing">{{event.playing}}</a></td>
+					<td><a href="#" editable-textarea="event.description">{{event.description}}</a></td>
 					<td><a ng-really-message="Are you sure" ng-really-click="removeEvent(event)" class="error">Delete</a></td>
 				</tr>
 			</tbody>
