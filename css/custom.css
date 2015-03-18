@@ -65,6 +65,12 @@ footer p {
     height: 50px;
 }
 
+#eventForm input[type="text"], #eventForm input[type="password"], #eventForm input[type="email"],
+#eventForm input[type="number"], #eventForm select, #eventForm input[type="date"]{
+    margin: 0px;
+    height: 50px;
+}
+
 .border-radius-top {
     -webkit-border-top-left-radius: 3px;
     -webkit-border-top-right-radius: 3px;

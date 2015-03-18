@@ -110,9 +110,20 @@ app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
 })
 
-app.controller('AdminEventsCtrl', function($scope) {
-
+app.controller('AdminEventsCtrl', function($scope, EventFactory) {
+	$scope.events = EventFactory.getEvent()
+	$scope.addEvent = function () {
+		EventFactory.addEvent($scope.newEvent)
+		$scope.newEvent = {}
+	}
 })
+
+// custom reverse array filter
+app.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+});
 
 app.factory('MenuFactory', function() {
 	var factory = {}
@@ -213,11 +224,16 @@ app.factory('EventFactory', function() {
 		return events
 	}
 
-	factory.orderByDate = function(item) {
-		var parts = item.date.split('-');
-		var date = new Date(parseInt(parts[2],
-												parseInt(parts[1].Month)))
+	factory.addEvent = function(gig) {
+		events.push({ date: gig.date, startTime: gig.startTime,
+			playing: gig.playing, description: gig.description })
 	}
+
+	// factory.orderByDate = function(item) {
+	// 	var parts = item.date.split('-');
+	// 	var date = new Date(parseInt(parts[2],
+	// 											parseInt(parts[1].Month)))
+	// }
 
 	return factory
 })

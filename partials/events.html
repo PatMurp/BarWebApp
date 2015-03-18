@@ -22,7 +22,7 @@
 		<!-- display events -->
 		<div ng-repeat="event in events | filter: query | orderBy:orderProp">
 			<img src="img/border.png">
-			<h4>{{event.date}} starting at {{event.startTime}}</h4><br>
+			<h4>{{event.date | date:'dd-MMM-yyyy'}} starting at {{event.startTime}}</h4><br>
 			<p>{{event.playing}}: {{event.description}}</p>
 		</div>
 	</div>

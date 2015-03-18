@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row"><br>
 	<div class="medium-2 columns">
 		<ul class="side-nav">
 			<h5 id="foodName">Admin Links</h5>
@@ -7,5 +7,36 @@
 		  <li><a href="#/adminMenu">Edit Menus</a></li>
 		  <li class="active"><a href="#/adminEvents">Add/edit events</a></li>
 		</ul>
+	</div>
+	<div class="medium-3 columns">
+		<h4>Add new Event</h4>
+		<form id="eventForm" ng-submit="addEvent()">
+			<input type="date" ng-model="newEvent.date" placeholder="date"  required>
+			<input type="text" ng-model="newEvent.startTime"placeholder="9:00pm time format" required>
+			<input type="text" ng-model="newEvent.playing" placeholder="Band or event type" required>
+			<textarea ng-model="newEvent.description" placeholder="Event Description, Optional!!"></textarea>
+			<input type="submit" class="button small border-radius-bottom" value="Add Event" style="width: 100%">
+
+		</form>
+	</div>
+	<div class="medium-7 columns">
+		<table>
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Event</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="event in events | reverse"{{event.playing}}>
+				<tr>
+					<td>{{event.date | date:'dd-MMM-yyyy'}}</td>
+					<td>{{event.startTime}}</td>
+					<td>{{event.playing}}</td>
+					<td>{{event.description}}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
