@@ -10,13 +10,12 @@
 	</div>
 	<div class="medium-3 columns">
 		<h4>Add new Event</h4>
-		<form id="eventForm" ng-submit="addEvent()">
-			<input type="date" ng-model="newEvent.date" placeholder="date"  required>
-			<input type="text" ng-model="newEvent.startTime"placeholder="9:00pm time format" required>
-			<input type="text" ng-model="newEvent.playing" placeholder="Band or event type" required>
-			<textarea ng-model="newEvent.description" placeholder="Event Description, Optional!!"></textarea>
-			<input type="submit" class="button small border-radius-bottom" value="Add Event" style="width: 100%">
-
+		<form name="eventForm" id="eventForm" ng-submit="addEvent()">
+			<input type="date" ng-model="newEvent.date" placeholder="date"  name="date" required>
+			<input type="time" ng-model="newEvent.startTime" value="21:00" name="time" required>
+			<input type="text" ng-model="newEvent.playing" placeholder="Band or event type" name="playing" required>
+			<textarea ng-model="newEvent.description" maxlength="150" placeholder="Event Description, Optional!!  150 characters max"></textarea>
+			<input type="submit" class="button small border-radius-bottom" value="Add Event" ng-disabled="eventForm.$invalid" style="width: 100%">
 		</form>
 	</div>
 	<div class="medium-7 columns">
@@ -32,7 +31,7 @@
 			<tbody ng-repeat="event in events | reverse"{{event.playing}}>
 				<tr>
 					<td>{{event.date | date:'dd-MMM-yyyy'}}</td>
-					<td>{{event.startTime}}</td>
+					<td>{{event.startTime | date: 'h:mma'}}</td>
 					<td>{{event.playing}}</td>
 					<td>{{event.description}}</td>
 				</tr>
