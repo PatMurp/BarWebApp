@@ -91,10 +91,6 @@ app.controller('MenuCtrl', function($scope, MenuFactory) {
 app.controller('EventsCtrl', function($scope, EventFactory) {
 	$scope.events = EventFactory.getEvent()
 
-	// $scope.orderByDate = function
- //  }
-	
-
 })
 
 
@@ -118,7 +114,7 @@ app.controller('AdminEventsCtrl', function($scope, EventFactory) {
 	}
 
 	
-	// delete from filterted array
+	// custom delete from filtered array
 	$scope.removeEvent = function(event){
     $scope.events.splice($scope.events.indexOf(event),1);
 	}
@@ -133,6 +129,9 @@ app.filter('reverse', function() {
     return items.slice().reverse();
   };
 });
+
+
+
 
 app.factory('MenuFactory', function() {
 	var factory = {}
@@ -201,29 +200,29 @@ app.factory('MenuFactory', function() {
 app.factory('EventFactory', function() {
 	var factory = {};
 	var events = [{
-		date: '14-Mar-2015',
+		eventDate: '14-Mar-2015',
 		startTime: '9:00pm',
 		playing: "Mountain Thyme"
 	}, {
-		date: '20-Mar-2015',
+		eventDate: '20-Mar-2015',
 		startTime: '9:30pm',
 		playing: "Private Party"
 	}, {
-		date: '21-Mar-2015',
+		eventDate: '21-Mar-2015',
 		startTime: '10:00pm',
 		playing: "The Indians",
 		description: 'Irelands top showband'
 	}, {
-		date: '28-Mar-2015',
+		eventDate: '28-Mar-2015',
 		startTime: '9:00pm',
 		playing: "Mountain Thyme"
 	}, {
-		date: '4-Apr-2015',
+		eventDate: '04-Apr-2015',
 		startTime: '9:00pm',
 		playing: "Bally slashers",
 		description: 'New local band please support!!'
 	}, {
-		date: '11-Apr-2015',
+		eventDate: '11-Apr-2015',
 		startTime: '9:30pm',
 		playing: "Nixon",
 		description: 'Modern and classic funk, disco, rock & dance'
@@ -234,7 +233,7 @@ app.factory('EventFactory', function() {
 	}
 
 	factory.addEvent = function(gig) {
-		events.push({ date: gig.date, startTime: gig.startTime,
+		events.push({ eventDate: gig.eventDate, startTime: gig.startTime,
 			playing: gig.playing, description: gig.description })
 	}
 
