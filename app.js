@@ -37,7 +37,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 		.state('adminHome', {
-			url: '/',
+			url: '/admin/home',
 			templateUrl: 'partials/admin/home.html',
 			controller: 'HomeController',
 			controllerAs: 'vm'
@@ -49,12 +49,12 @@ function config($stateProvider, $locationProvider, $urlRouterProvider) {
 			controllerAs: 'vm'
 		})
 		.state('adminMenu', {
-			url: '/adminMenu',
+			url: '/admin/editMenu',
 			templateUrl: 'partials/admin/adminMenu.html',
 			controller: 'AdminMenuCtrl'
 		})
 		.state('adminEvents', {
-			url: '/adminEvents',
+			url: '/admin/events',
 			templateUrl: 'partials/admin/adminEvents.html',
 			controller: 'AdminEventsCtrl',
 			controllerAs: 'vm'
