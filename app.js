@@ -2,8 +2,6 @@ var app = angular.module("barApp", ['xeditable', 'angAccordion', 'ui.router', 'n
 	.config(config)
 	.run(run);
 
-
-// app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
 
 function config($stateProvider, $locationProvider, $urlRouterProvider) {
@@ -82,21 +80,34 @@ function run($rootScope, $location, $cookieStore, $http) {
 }
 
 app.controller('HomePageCtrl', function($scope) {
-
 })
 
 app.controller('MenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
-
 })
 
 app.controller('EventsCtrl', function($scope, EventFactory) {
 	$scope.events = EventFactory.getEvent()
-
 })
 
 
+app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
+	$scope.foodMenus = MenuFactory.getMenu()
+})
 
+app.controller('AdminEventsCtrl', function($scope, EventFactory) {
+	$scope.events = EventFactory.getEvent()
+	$scope.addEvent = function() {
+		EventFactory.addEvent($scope.newEvent)
+		$scope.newEvent = {}
+	}
+	// custom delete from filtered array
+	$scope.removeEvent = function(event) {
+		$scope.events.splice($scope.events.indexOf(event), 1);
+	}
+})
+
+// photo slider controller
 app.controller('GalleryCtrl', function($scope) {
 	
 	$scope.slides = [
@@ -125,22 +136,7 @@ app.controller('GalleryCtrl', function($scope) {
   };
 })
 
-app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
-	$scope.foodMenus = MenuFactory.getMenu()
-})
-
-app.controller('AdminEventsCtrl', function($scope, EventFactory) {
-	$scope.events = EventFactory.getEvent()
-	$scope.addEvent = function() {
-		EventFactory.addEvent($scope.newEvent)
-		$scope.newEvent = {}
-	}
-	// custom delete from filtered array
-	$scope.removeEvent = function(event) {
-		$scope.events.splice($scope.events.indexOf(event), 1);
-	}
-})
-
+// animation for photo slider
 app.animation('.slide-animation', function () {
   return {
     addClass: function (element, className, done) {
@@ -171,7 +167,6 @@ app.filter('reverse', function() {
 		return items.slice().reverse();
 	};
 });
-
 
 
 app.factory('MenuFactory', function() {
@@ -222,12 +217,6 @@ app.factory('MenuFactory', function() {
 			price: '€25.00 per bottle or €5.50 per glass'
 		}]
 	}]
-
-	// testing only to be deleted !!!!
-	console.log(Array.isArray(foodMenus))
-	console.log(foodMenus[0].starters[0].price)
-	var now = new Date()
-	console.log(now)
 
 	factory.getMenu = function() {
 		return foodMenus
