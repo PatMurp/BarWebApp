@@ -1,10 +1,11 @@
-var app = angular.module("barApp", ['xeditable', 'angAccordion','ui.router','ngCookies'])
-								 .config(config)
-								 .run(run);
-								
+var app = angular.module("barApp", ['xeditable', 'angAccordion', 'ui.router', 'ngCookies', 'ngAnimate'])
+	.config(config)
+	.run(run);
+
 
 // app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
+
 function config($stateProvider, $locationProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise('/home')
@@ -62,21 +63,22 @@ function config($stateProvider, $locationProvider, $urlRouterProvider) {
 }
 
 run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
-function run($rootScope, $location, $cookieStore, $http) {
-    // keep user logged in after page refresh
-    $rootScope.globals = $cookieStore.get('globals') || {};
-    if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-    }
 
-    $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        // redirect to login page if not logged in and trying to access a restricted page
-        var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/adminLogin']) === -1;
-        var loggedIn = $rootScope.globals.currentUser;
-        if (restrictedPage && !loggedIn) {
-            $location.path('/adminLogin');
-        }
-    });
+function run($rootScope, $location, $cookieStore, $http) {
+	// keep user logged in after page refresh
+	$rootScope.globals = $cookieStore.get('globals') || {};
+	if ($rootScope.globals.currentUser) {
+		$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+	}
+
+	$rootScope.$on('$locationChangeStart', function(event, next, current) {
+		// redirect to login page if not logged in and trying to access a restricted page
+		var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/adminLogin']) === -1;
+		var loggedIn = $rootScope.globals.currentUser;
+		if (restrictedPage && !loggedIn) {
+			$location.path('/adminLogin');
+		}
+	});
 }
 
 app.controller('HomePageCtrl', function($scope) {
@@ -95,11 +97,32 @@ app.controller('EventsCtrl', function($scope, EventFactory) {
 
 
 
-
 app.controller('GalleryCtrl', function($scope) {
-	$scope.date = new Date();
+	
+	$scope.slides = [
+		{image: 'img/photos/image1.png', description: 'Image 00'},
+		{image: 'img/photos/image2.png', description: "Image 01"},
+		{image: 'img/photos/image3.png', description: 'Image 02'},
+		{image: 'img/photos/image4.png', description: 'Image 03'}
+	]
 
+	$scope.currentIndex = 0;
 
+  $scope.setCurrentSlideIndex = function (index) {
+      $scope.currentIndex = index;
+  };
+
+  $scope.isCurrentSlideIndex = function (index) {
+      return $scope.currentIndex === index;
+  };
+
+  $scope.prevSlide = function () {
+      $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
+  };
+
+  $scope.nextSlide = function () {
+      $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
+  };
 })
 
 app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
@@ -108,28 +131,46 @@ app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 
 app.controller('AdminEventsCtrl', function($scope, EventFactory) {
 	$scope.events = EventFactory.getEvent()
-	$scope.addEvent = function () {
+	$scope.addEvent = function() {
 		EventFactory.addEvent($scope.newEvent)
 		$scope.newEvent = {}
 	}
-
-	
 	// custom delete from filtered array
-	$scope.removeEvent = function(event){
-    $scope.events.splice($scope.events.indexOf(event),1);
+	$scope.removeEvent = function(event) {
+		$scope.events.splice($scope.events.indexOf(event), 1);
 	}
+})
 
+app.animation('.slide-animation', function () {
+  return {
+    addClass: function (element, className, done) {
+        if (className == 'ng-hide') {
+            TweenMax.to(element, 0.5, {left: -element.parent().width(), onComplete: done });
+        }
+        else {
+            done()
+        }
+    },
+    removeClass: function (element, className, done) {
+        if (className == 'ng-hide') {
+          element.removeClass('ng-hide')
 
-
+          TweenMax.set(element, { left: element.parent().width() })
+          TweenMax.to(element, 0.5, {left: 0, onComplete: done })
+        }
+        else {
+            done()
+        }
+    }
+  }
 })
 
 // custom reverse array filter
 app.filter('reverse', function() {
-  return function(items) {
-    return items.slice().reverse();
-  };
+	return function(items) {
+		return items.slice().reverse();
+	};
 });
-
 
 
 
@@ -188,13 +229,10 @@ app.factory('MenuFactory', function() {
 	var now = new Date()
 	console.log(now)
 
-
 	factory.getMenu = function() {
 		return foodMenus
 	}
-
 	return factory
-
 })
 
 app.factory('EventFactory', function() {
@@ -229,33 +267,32 @@ app.factory('EventFactory', function() {
 	}]
 
 	factory.getEvent = function() {
-		return events
-	}
-
+			return events
+		}
+	// add event
 	factory.addEvent = function(gig) {
-		events.push({ eventDate: gig.eventDate, startTime: gig.startTime,
-			playing: gig.playing, description: gig.description })
+		events.push({
+			eventDate: gig.eventDate,
+			startTime: gig.startTime,
+			playing: gig.playing,
+			description: gig.description
+		})
 	}
 
 	return factory
 })
 
-// directive that creates a confirmation dialog for an action
+// directive that creates a confirmation dialog for delete action
 angular.module('barApp').directive('ngReallyClick', [function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('click', function() {
-                var message = attrs.ngReallyMessage;
-                if (message && confirm(message)) {
-                    scope.$apply(attrs.ngReallyClick);
-                }
-            });
-        }
-    }
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs) {
+			element.bind('click', function() {
+				var message = attrs.ngReallyMessage;
+				if (message && confirm(message)) {
+					scope.$apply(attrs.ngReallyClick);
+				}
+			});
+		}
+	}
 }]);
-
-
-
-
-
