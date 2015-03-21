@@ -2,13 +2,16 @@
 <h4>Please log out when finished !!</h4>
 <div class="row">
 	<div class="medium-2 columns">
-		<ul class="side-nav">
-			<h5 id="foodName">Admin Links</h5>
-		  <li><a href="#/adminLogin" class="button alert small">Logout</a></li>
+		<ul class="side-nav" id="sideNav">
+			<h5 id="foodName" class="text-center">Admin Links</h5>
+		  <li><a href="#/adminLogin" class="button alert border-radius-bottom-margin small">Logout</a></li>
+		  <li class="divider"></li>
 		  <li class="active"><a href="#/admin/home">Admin Home</a></li>
+		  <li class="divider"></li>
 		  <li><a href="#/admin/editMenu">Edit Menus</a></li>
+		  <li class="divider"></li>
 		  <li><a href="#/admin/events">Add/edit events</a></li>
-		</ul>
+		</ul><br>
 	</div>
 	<div class="medium-5 columns">
 		<table>
@@ -26,7 +29,7 @@
 					<td>{{user.username}}</td>
 					<td>{{user.firstName}}</td>
 					<td>{{user.lastName}}</td>
-					<td><a href="#" ng-really-message="Are you sure" ng-really-click="vm.deleteUser(user.id)" class="error">Delete</a></td>favicon.ico
+					<td><a href="#" ng-really-message="Are you sure" ng-really-click="vm.deleteUser(user.id)" class="error">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>

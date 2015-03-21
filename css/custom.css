@@ -33,7 +33,6 @@ footer p {
 	font: 1.5rem 'Great Vibes', Helvetica, sans-serif;
 }
 
-/*events styling*/
 
 /*login, & register */
 
@@ -108,6 +107,21 @@ footer p {
     color: green;
     font-weight: bold;
 }
+
+/*side navigation style*/
+#sideNav {
+    background: gainsboro;
+    border-radius: 15px;
+}
+
+.border-radius-bottom-margin {
+    -webkit-border-bottom-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 23px;
+}
+
+
 
 
 
