@@ -1,3 +1,4 @@
+
 <div class="row">
 	<div class="medium-8">
 		<h1 class="text-center" id="menuHeadings">Upcoming Events</h1>
@@ -11,7 +12,6 @@
 	</div>
 
 	<div class="medium-6 columns">
-
 		<!-- display events -->
 		<div ng-repeat="event in events | filter: query">
 			<img ng-src="img/border.png">
@@ -19,19 +19,19 @@
 			<p>{{event.playing}}: {{event.description}}</p>
 		</div>
 	</div>
-	<!-- images todo -->
-	<div class="medium-3 columns"></div>
-	<p class="text-center">Click for larger image</p>
-	<!-- thumbnails with link to large image, foundation.css feature -->
-	<a class="th" href="img/photos/indians.jpg">
-	  <img ng-src="img/photos/indians-th.jpg">
-	</a><br><br>
-	<a class="th" href="img/photos/nixon.jpg">
-	  <img ng-src="img/photos/nixon-th.jpg">
-	</a><br><br>
-	<a class="th" href="img/photos/localBand.jpg">
-	  <img ng-src="img/photos/localBand-th.jpg">
-	</a>
+	<div class="medium-3 columns">
+		<p class="text-center">Click for larger image</p>
+		<!-- thumbnails with link to large image, foundation.css feature -->
+		<a class="th" href="img/photos/indians.jpg">
+		  <img ng-src="img/photos/indians-th.jpg">
+		</a><br><br>
+		<a class="th" href="img/photos/nixon.jpg">
+		  <img ng-src="img/photos/nixon-th.jpg">
+		</a><br><br>
+		<a class="th" href="img/photos/localBand.jpg">
+		  <img ng-src="img/photos/localBand-th.jpg">
+		</a>
+	</div>
 </div>
 
 
