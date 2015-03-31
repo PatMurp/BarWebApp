@@ -11,9 +11,9 @@ exports.create = function(req, res) {
 	// assign new id
 	var nextId = 0
   var last = _.last(datastore.events)
-  console.log(last):
   if (last != undefined) {
      nextId = last.id + 1
+     console.log(nextId)
   } else {
     nextId = 1
   }
@@ -41,6 +41,19 @@ exports.update = function(req, res) {
 		event.playing = req.body.playing
 		event.description = req.body.description
 		return res.send(200, event)
+	} else {
+		return res.send(404)
+	}
+};
+
+// delete an event from datastore
+exports.destroy = function (req, res) {
+	var elements = _.remove(datastore.events,
+		function(event) {
+			return event.id == req.params.id;
+		});
+	if (elements.length == 1) {
+		return res.send(200);
 	} else {
 		return res.send(404)
 	}

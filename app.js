@@ -14,6 +14,7 @@ var event = require('./api/events/index');
 app.get('/api/events', event.index);
 app.post('/api/events', event.create);
 app.put('/api/events/:id', event.update);
+app.delete('/api/events/:id', event.destroy);
 
 //app.use(express.static(__dirname + '/public'));
 
