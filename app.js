@@ -13,6 +13,7 @@ var event = require('./api/events/index');
 // add routes for events api
 app.get('/api/events', event.index);
 app.post('/api/events', event.create);
+app.put('/api/events/:id', event.update);
 
 //app.use(express.static(__dirname + '/public'));
 
