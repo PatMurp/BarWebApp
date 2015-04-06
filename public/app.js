@@ -72,7 +72,7 @@ function run($rootScope, $location, $cookieStore, $http) {
 	$rootScope.$on('$locationChangeStart', function(event, next, current) {
 		// redirect to login page if not logged in and trying to access a restricted page
 		var restrictedPage = $.inArray($location.path(), [
-			'/login', '/register', '/adminLogin', '/home', '/menu', '/events'
+			'/login', '/register', '/adminLogin', '/home', '/menu', '/events', '/gallery'
 			]) === -1;
 		var loggedIn = $rootScope.globals.currentUser;
 		if (restrictedPage && !loggedIn) {
@@ -109,15 +109,17 @@ app.controller('AdminEventsCtrl', [
 			$scope.events = events;
 	});
 
-	$scope.events = EventFactory.getEvent()
-	$scope.addEvent = function() {
-		EventFactory.addEvent($scope.newEvent)
-		$scope.newEvent = {}
-	}
-	// custom delete from filtered array
-	$scope.removeEvent = function(event) {
-		$scope.events.splice($scope.events.indexOf(event), 1);
-	}
+
+
+	// $scope.events = EventFactory.getEvent()
+	// $scope.addEvent = function() {
+	// 	EventFactory.addEvent($scope.newEvent)
+	// 	$scope.newEvent = {}
+	// }
+	// // custom delete from filtered array
+	// $scope.removeEvent = function(event) {
+	// 	$scope.events.splice($scope.events.indexOf(event), 1);
+	// }
 }])
 
 // photo slider controller
