@@ -15,8 +15,8 @@
 	<div class="medium-4 medium-offset-2 columns">
 		<h4 class="text-center">Add new Event</h4>
 		<form name="eventForm" id="eventForm" ng-submit="addEvent()">
-			<input type="date" ng-model="newEvent.eventDate" placeholder="Event date: e.g. 15-Mar-2015"  name="date" required>
-			<input type="time" ng-model="newEvent.startTime" placeholder="Start time: e.g. 9:00pm" name="time" required>
+			<input type="date" ng-model="newEvent.event_date" placeholder="Event date: e.g. 15-Mar-2015"  name="date" required>
+			<input type="time" ng-model="newEvent.start_time" placeholder="Start time: e.g. 9:00pm" name="time" required>
 			<input type="text" ng-model="newEvent.playing" placeholder="Band or event type" name="playing" required>
 			<textarea ng-model="newEvent.description" maxlength="150" placeholder="Event Description, Optional!!  150 characters max"></textarea>
 			<input type="submit" class="button small border-radius-bottom" value="Add Event" ng-disabled="eventForm.$invalid" style="width: 100%">
@@ -40,8 +40,8 @@
 			</thead><!-- reverse order of events, added events appear at top -->
 			<tbody ng-repeat="event in events | reverse"{{event.playing}}>
 				<tr><!-- enable event editing with xeditable library -->
-					<td><a href="#" editable-date="event.eventDate">{{event.eventDate | date:'dd-MMM-yyyy'}}</a></td>
-					<td><a href="#" editable-time="event.startTime">{{event.startTime | date: 'h:mma'}}</a></td>
+					<td><a href="#" editable-date="event.event_date">{{event.event_date | date:'dd-MMM-yyyy'}}</a></td>
+					<td><a href="#" editable-time="event.start_time">{{event.start_time | date: 'h:mma'}}</a></td>
 					<td><a href="#" editable-text="event.playing">{{event.playing}}</a></td>
 					<td><a href="#" editable-textarea="event.description">{{event.description}}</a></td>
 					<td><a ng-really-message="Are you sure" ng-really-click="removeEvent(event)" class="error">Delete</a></td>

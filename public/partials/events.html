@@ -15,7 +15,7 @@
 		<!-- display events -->
 		<div ng-repeat="event in events | filter: query">
 			<img ng-src="img/border.png">
-			<h4>{{event.eventDate | date:'dd-MMM-yyyy'}} starting at {{event.startTime | date: 'h:mma'}}</h4><br>
+			<h4>{{event.event_date | date:'dd-MMM-yyyy'}} starting at {{event.start_time | date: 'h:mma'}}</h4><br>
 			<p>{{event.playing}}: {{event.description}}</p>
 		</div>
 	</div>

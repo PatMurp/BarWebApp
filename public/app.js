@@ -88,16 +88,27 @@ app.controller('MenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
 })
 
-app.controller('EventsCtrl', function($scope, EventFactory) {
-	$scope.events = EventFactory.getEvent()
-})
+// use api to get events
+app.controller('EventsCtrl', [
+	'$scope', '$http',
+	function($scope, $http) {
+		$http.get('/api/events').success(function(events) {
+			$scope.events = events;
+		});
+	}])
 
 
 app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
 })
 
-app.controller('AdminEventsCtrl', function($scope, EventFactory) {
+app.controller('AdminEventsCtrl', [
+	'$scope', '$http',
+	function($scope, $http) {
+		$http.get('/api/events').success(function(events) {
+			$scope.events = events;
+	});
+
 	$scope.events = EventFactory.getEvent()
 	$scope.addEvent = function() {
 		EventFactory.addEvent($scope.newEvent)
@@ -107,7 +118,7 @@ app.controller('AdminEventsCtrl', function($scope, EventFactory) {
 	$scope.removeEvent = function(event) {
 		$scope.events.splice($scope.events.indexOf(event), 1);
 	}
-})
+}])
 
 // photo slider controller
 app.controller('GalleryCtrl', function($scope) {
@@ -227,39 +238,7 @@ app.factory('MenuFactory', function() {
 })
 
 app.factory('EventFactory', function() {
-	var factory = {};
-	var events = [{
-		eventDate: '14-Mar-2015',
-		startTime: '9:00pm',
-		playing: "Mountain Thyme"
-	}, {
-		eventDate: '20-Mar-2015',
-		startTime: '9:30pm',
-		playing: "Private Party"
-	}, {
-		eventDate: '21-Mar-2015',
-		startTime: '10:00pm',
-		playing: "The Indians",
-		description: 'Irelands top showband'
-	}, {
-		eventDate: '28-Mar-2015',
-		startTime: '9:00pm',
-		playing: "Mountain Thyme"
-	}, {
-		eventDate: '04-Apr-2015',
-		startTime: '9:00pm',
-		playing: "Bally slashers",
-		description: 'New local band please support!!'
-	}, {
-		eventDate: '11-Apr-2015',
-		startTime: '9:30pm',
-		playing: "Nixon",
-		description: 'Modern and classic funk, disco, rock & dance'
-	}]
-
-	factory.getEvent = function() {
-			return events
-		}
+	
 	// add event
 	factory.addEvent = function(gig) {
 		events.push({
