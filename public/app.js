@@ -102,20 +102,28 @@ app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
 })
 
-app.controller('AdminEventsCtrl', [
-	'$scope', '$http',
-	function($scope, $http) {
-		$http.get('/api/events').success(function(events) {
-			$scope.events = events;
+app.controller('AdminEventsCtrl', ['$scope', 'EventsService',
+	function($scope, EventsService) {
+		 // use api to get events
+		EventsService.getEvents()
+			.success(function(events) {
+				$scope.events = events;
 	});
 
+	$scope.addEvent = function() {
+		var event = {
+			event_date: $scope.newEvent.event_date,
+			start_time: $scope.newEvent.start_time,
+			playing: $scope.newEvent.playing,
+			description: $scope.newEvent.description
+		}
+		EventsService.addEvent(event)
+			.success(function(added_event) {
+				$scope.events.push(added_event);
+				$scope.newEvent = {}
+			});
+	}
 
-
-	// $scope.events = EventFactory.getEvent()
-	// $scope.addEvent = function() {
-	// 	EventFactory.addEvent($scope.newEvent)
-	// 	$scope.newEvent = {}
-	// }
 	// // custom delete from filtered array
 	// $scope.removeEvent = function(event) {
 	// 	$scope.events.splice($scope.events.indexOf(event), 1);
@@ -253,6 +261,24 @@ app.factory('EventFactory', function() {
 
 	return factory
 })
+
+app.factory('EventsService', ['$http', function($http) {
+	var api = {
+		getEvents : function() {
+			return $http.get('/api/events')
+		},
+		addEvent : function(event) {
+			return $http.post('/api/events', event)
+		},
+		editEvent : function(event) {
+			return $http.put('/api/events' + event.id, event)
+		},
+		deleteEvent : function(event) {
+			return $http.delete('/api/events' + event.id, event)
+		}
+	}
+	return api
+}]);
 
 // directive that creates a confirmation dialog for delete action
 angular.module('barApp').directive('ngReallyClick', [function() {
