@@ -102,8 +102,8 @@ app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
 })
 
-app.controller('AdminEventsCtrl', ['$scope', 'EventsService',
-	function($scope, EventsService) {
+app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
+	function($scope, EventsService, $http) {
 		 // use api to get events
 		EventsService.getEvents()
 			.success(function(events) {
@@ -124,10 +124,13 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService',
 			});
 	}
 
-	// // custom delete from filtered array
-	// $scope.removeEvent = function(event) {
-	// 	$scope.events.splice($scope.events.indexOf(event), 1);
-	// }
+	$scope.removeEvent = function(index) {
+		$http.delete('/api/events/' + index.id)
+		.success(function() {
+			$scope.events.splice($scope.events.indexOf(index), 1);
+		});
+	}
+	
 }])
 
 // photo slider controller
