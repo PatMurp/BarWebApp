@@ -110,6 +110,7 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 				$scope.events = events;
 	});
 
+	// use api to add events
 	$scope.addEvent = function() {
 		var event = {
 			event_date: $scope.newEvent.event_date,
@@ -124,6 +125,11 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 			});
 	}
 
+	$scope.updateEvent = function() {
+		return $http.put('/api/events' + $scope.event.id, $scope.event);
+	};
+	
+	// use api to delete events
 	$scope.removeEvent = function(index) {
 		$http.delete('/api/events/' + index.id)
 		.success(function() {
