@@ -7,7 +7,7 @@ var app = express();
 require('./config/express').addMiddleware(app)
 require('./routes')(app)
 
-app.listen(4000, function() {
+app.listen(process.env.PORT || 5000, function() {
 	console.log('Express server listening');
 });
 
