@@ -213,6 +213,7 @@ app.animation('.slide-animation', function() {
 // custom reverse array filter
 app.filter('reverse', function() {
 	return function(items) {
+		if (!items || !items.length) { return; }
 		return items.slice().reverse();
 	};
 });
