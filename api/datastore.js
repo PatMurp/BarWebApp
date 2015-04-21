@@ -17,7 +17,7 @@ exports.events = [{
 }]
 
 exports.menus = [{
-	"starters": [{
+	starters: [{
 		id: 1,
 		name: 'Wild Turnip',
 		description: 'Cooked peeled and cut-up turnips with sliced garlic in olive oil.',
@@ -33,7 +33,7 @@ exports.menus = [{
 		description: 'Freshly made vegetable based soups, please ask your server for today’s creation!',
 		price: '€5.50'
 	}],
-	"mains": [{
+	mains: [{
 		id: 1,
 		name: 'Lamb Stew',
 		description: 'Tender diced lamb, stewed with potato, carrots, celery and pearl barley.',
@@ -49,7 +49,7 @@ exports.menus = [{
 		description: 'Roast Beef or Ham, Cheese, chutney, homemade coleslaw & homemade bread.',
 		price: '€9.95'
 	}],
-	"deserts": [{
+	deserts: [{
 		id: 1,
 		name: 'Homemade Ice Cream',
 		description: 'Luxury ice cream laced through with caramelised brown bread pieces',
@@ -60,7 +60,7 @@ exports.menus = [{
 		description: 'Our cook selects from a range of fresh seasonal ingredients.',
 		price: '€4.50'
 	}],
-	"wines": [{
+	wines: [{
 		id: 1,
 		name: 'Esperanza Verdejo Viura  -  Rueda',
 		description: 'Crisp and refreshing white wine, displays delicate floral aromas and forward fruit',

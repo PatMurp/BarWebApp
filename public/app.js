@@ -83,9 +83,17 @@ function run($rootScope, $location, $cookieStore, $http) {
 
 app.controller('HomePageCtrl', function($scope) {})
 
-app.controller('MenuCtrl', function($scope, MenuFactory) {
-	$scope.foodMenus = MenuFactory.getMenu()
-})
+
+
+app.controller('MenuCtrl', [
+	'$scope', '$http',
+	function($scope, $http) {
+		// use api to diplay menus
+		$http.get('/api/menus').success(function(menus) {
+			$scope.foodMenus = menus;
+		});
+	}
+]);
 
 // use api to get events
 app.controller('EventsCtrl', [
@@ -95,12 +103,22 @@ app.controller('EventsCtrl', [
 			$scope.events = events;
 		});
 	}
-])
+]);
 
 
-app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
-	$scope.foodMenus = MenuFactory.getMenu()
-})
+// app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
+// 	$scope.foodMenus = MenuFactory.getMenu()
+// })
+
+app.controller('AdminMenuCtrl', [
+	'$scope', '$http',
+	function($scope, $http) {
+		// use api to display menus
+		$http.get('/api/menus').success(function(menus) {
+			$scope.foodMenus = menus;
+		});
+	}
+]);
 
 app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 	function($scope, EventsService, $http) {
@@ -125,12 +143,18 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 				});
 		}
 
+		//onbeforesave xeditable
 		$scope.updateEvent = function(data) {
-			return $http.post('/api/events', {
+			return $http.put('/api/events/', {
 				id: $scope.events.id,
 				name: data
 			});
 		};
+
+		// onaftersave xeditable
+		// $scope.updateEvent = function() {
+		// 	return $http.post('api/events/' + $scope.events.id, $scope.events)
+		// }
 
 		// use api to delete events
 		$scope.removeEvent = function(index) {
@@ -213,83 +237,13 @@ app.animation('.slide-animation', function() {
 // custom reverse array filter
 app.filter('reverse', function() {
 	return function(items) {
-		if (!items || !items.length) { return; }
+		if (!items || !items.length) {
+			return;
+		}
 		return items.slice().reverse();
 	};
 });
 
-
-app.factory('MenuFactory', function() {
-	var factory = {}
-	var foodMenus = [{
-		"starters": [{
-			name: 'Wild Turnip',
-			description: 'Cooked peeled and cut-up turnips with sliced garlic in olive oil.',
-			price: '€4.95'
-		}, {
-			name: 'Wild mushrooms',
-			description: 'Wild mushrooms served with a house roasted garlic mayonnaise.',
-			price: '€5.75'
-		}, {
-			name: 'Daily Soup',
-			description: 'Freshly made vegetable based soups, please ask your server for today’s creation!',
-			price: '€5.50'
-		}],
-		"mains": [{
-			name: 'Lamb Stew',
-			description: 'Tender diced lamb, stewed with potato, carrots, celery and pearl barley.',
-			price: '€10.65'
-		}, {
-			name: 'Bacon & Cabbage',
-			description: 'Organic slow cooked bacon, potato, cabbage and parsley sauce.',
-			price: '€11.75'
-		}, {
-			name: "Ploughman's Lunch",
-			description: 'Roast Beef or Ham, Cheese, chutney, homemade coleslaw & homemade bread.',
-			price: '€9.95'
-		}],
-		"deserts": [{
-			name: 'Homemade Ice Cream',
-			description: 'Luxury ice cream laced through with caramelised brown bread pieces',
-			price: '€3.80'
-		}, {
-			name: 'Fruit Crumble',
-			description: 'Our cook selects from a range of fresh seasonal ingredients.',
-			price: '€4.50'
-		}],
-		"wines": [{
-			name: 'Esperanza Verdejo Viura  -  Rueda',
-			description: 'Crisp and refreshing white wine, displays delicate floral aromas and forward fruit',
-			price: '€20.80 per bottle or €4.80 per glass'
-		}, {
-			name: 'Henry Fessy Fleurie',
-			description: 'French red wine with black cherry and cassis flavors.',
-			price: '€25.00 per bottle or €5.50 per glass'
-		}]
-	}]
-
-	console.log(foodMenus)
-
-	factory.getMenu = function() {
-		return foodMenus
-	}
-	return factory
-})
-
-app.factory('EventFactory', function() {
-
-	// add event
-	factory.addEvent = function(gig) {
-		events.push({
-			eventDate: gig.eventDate,
-			startTime: gig.startTime,
-			playing: gig.playing,
-			description: gig.description
-		})
-	}
-
-	return factory
-})
 
 app.factory('EventsService', ['$http', function($http) {
 	var api = {
