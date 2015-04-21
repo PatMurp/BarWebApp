@@ -73,7 +73,7 @@ function run($rootScope, $location, $cookieStore, $http) {
 		// redirect to login page if not logged in and trying to access a restricted page
 		var restrictedPage = $.inArray($location.path(), [
 			'/login', '/register', '/adminLogin', '/home', '/menu', '/events', '/gallery'
-			]) === -1;
+		]) === -1;
 		var loggedIn = $rootScope.globals.currentUser;
 		if (restrictedPage && !loggedIn) {
 			$location.path('/home');
@@ -81,8 +81,7 @@ function run($rootScope, $location, $cookieStore, $http) {
 	});
 }
 
-app.controller('HomePageCtrl', function($scope) {
-})
+app.controller('HomePageCtrl', function($scope) {})
 
 app.controller('MenuCtrl', function($scope, MenuFactory) {
 	$scope.foodMenus = MenuFactory.getMenu()
@@ -95,7 +94,8 @@ app.controller('EventsCtrl', [
 		$http.get('/api/events').success(function(events) {
 			$scope.events = events;
 		});
-	}])
+	}
+])
 
 
 app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
@@ -104,93 +104,110 @@ app.controller('AdminMenuCtrl', function($scope, MenuFactory) {
 
 app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 	function($scope, EventsService, $http) {
-		 // use api to get events
+		// use api to get events
 		EventsService.getEvents()
 			.success(function(events) {
 				$scope.events = events;
-	});
-
-	// use api to add events
-	$scope.addEvent = function() {
-		var event = {
-			event_date: $scope.newEvent.event_date,
-			start_time: $scope.newEvent.start_time,
-			playing: $scope.newEvent.playing,
-			description: $scope.newEvent.description
-		}
-		EventsService.addEvent(event)
-			.success(function(added_event) {
-				$scope.events.push(added_event);
-				$scope.newEvent = {}
 			});
-	}
 
-	$scope.updateEvent = function() {
-		return $http.put('/api/events' + $scope.event.id, $scope.event);
-	};
-	
-	// use api to delete events
-	$scope.removeEvent = function(index) {
-		$http.delete('/api/events/' + index.id)
-		.success(function() {
-			$scope.events.splice($scope.events.indexOf(index), 1);
-		});
+		// use api to add events
+		$scope.addEvent = function() {
+			var event = {
+				event_date: $scope.newEvent.event_date,
+				start_time: $scope.newEvent.start_time,
+				playing: $scope.newEvent.playing,
+				description: $scope.newEvent.description
+			}
+			EventsService.addEvent(event)
+				.success(function(added_event) {
+					$scope.events.push(added_event);
+					$scope.newEvent = {}
+				});
+		}
+
+		$scope.updateEvent = function(data) {
+			return $http.post('/api/events', {
+				id: $scope.events.id,
+				name: data
+			});
+		};
+
+		// use api to delete events
+		$scope.removeEvent = function(index) {
+			$http.delete('/api/events/' + index.id)
+				.success(function() {
+					$scope.events.splice($scope.events.indexOf(index), 1);
+				});
+		}
+
 	}
-	
-}])
+])
 
 // photo slider controller
 app.controller('GalleryCtrl', function($scope) {
-	
-	$scope.slides = [
-		{image: 'img/photos/image1.png', description: 'Image 00'},
-		{image: 'img/photos/image2.png', description: "Image 01"},
-		{image: 'img/photos/image3.png', description: 'Image 02'},
-		{image: 'img/photos/image4.png', description: 'Image 03'}
-	]
+
+	$scope.slides = [{
+		image: 'img/photos/image1.png',
+		description: 'Image 00'
+	}, {
+		image: 'img/photos/image2.png',
+		description: "Image 01"
+	}, {
+		image: 'img/photos/image3.png',
+		description: 'Image 02'
+	}, {
+		image: 'img/photos/image4.png',
+		description: 'Image 03'
+	}]
 
 	$scope.currentIndex = 0;
 
-  $scope.setCurrentSlideIndex = function (index) {
-      $scope.currentIndex = index;
-  };
+	$scope.setCurrentSlideIndex = function(index) {
+		$scope.currentIndex = index;
+	};
 
-  $scope.isCurrentSlideIndex = function (index) {
-      return $scope.currentIndex === index;
-  };
+	$scope.isCurrentSlideIndex = function(index) {
+		return $scope.currentIndex === index;
+	};
 
-  $scope.prevSlide = function () {
-      $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-  };
+	$scope.prevSlide = function() {
+		$scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
+	};
 
-  $scope.nextSlide = function () {
-      $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
-  };
+	$scope.nextSlide = function() {
+		$scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
+	};
 })
 
 // animation for photo slider
-app.animation('.slide-animation', function () {
-  return {
-    addClass: function (element, className, done) {
-        if (className == 'ng-hide') {
-            TweenMax.to(element, 0.5, {left: -element.parent().width(), onComplete: done });
-        }
-        else {
-            done()
-        }
-    },
-    removeClass: function (element, className, done) {
-        if (className == 'ng-hide') {
-          element.removeClass('ng-hide')
+app.animation('.slide-animation', function() {
+	return {
+		addClass: function(element, className, done) {
+			if (className == 'ng-hide') {
+				TweenMax.to(element, 0.5, {
+					left: -element.parent().width(),
+					onComplete: done
+				});
+			} else {
+				done()
+			}
+		},
+		removeClass: function(element, className, done) {
+			if (className == 'ng-hide') {
+				element.removeClass('ng-hide')
 
-          TweenMax.set(element, { left: element.parent().width() })
-          TweenMax.to(element, 0.5, {left: 0, onComplete: done })
-        }
-        else {
-            done()
-        }
-    }
-  }
+				TweenMax.set(element, {
+					left: element.parent().width()
+				})
+				TweenMax.to(element, 0.5, {
+					left: 0,
+					onComplete: done
+				})
+			} else {
+				done()
+			}
+		}
+	}
 })
 
 // custom reverse array filter
@@ -250,6 +267,8 @@ app.factory('MenuFactory', function() {
 		}]
 	}]
 
+	console.log(foodMenus)
+
 	factory.getMenu = function() {
 		return foodMenus
 	}
@@ -257,7 +276,7 @@ app.factory('MenuFactory', function() {
 })
 
 app.factory('EventFactory', function() {
-	
+
 	// add event
 	factory.addEvent = function(gig) {
 		events.push({
@@ -273,16 +292,16 @@ app.factory('EventFactory', function() {
 
 app.factory('EventsService', ['$http', function($http) {
 	var api = {
-		getEvents : function() {
+		getEvents: function() {
 			return $http.get('/api/events')
 		},
-		addEvent : function(event) {
+		addEvent: function(event) {
 			return $http.post('/api/events', event)
 		},
-		editEvent : function(event) {
+		editEvent: function(event) {
 			return $http.put('/api/events' + event.id, event)
 		},
-		deleteEvent : function(event) {
+		deleteEvent: function(event) {
 			return $http.delete('/api/events' + event.id, event)
 		}
 	}
