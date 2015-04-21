@@ -1,5 +1,11 @@
 var _ = require('lodash')
 var datastore = require('../datastore');
+var Event = require('./event.model');
+
+// error handling function
+function handleError(res, err) {
+	return res.send(500,err);
+}
 
 // get list of events
 exports.index = function(req, res) {
