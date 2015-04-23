@@ -144,10 +144,16 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 		}
 
 		//onbeforesave xeditable
-		$scope.updateEvent = function(data) {
-			return $http.put('/api/events/', {
-				id: $scope.events.id,
-				name: data
+		$scope.updateEvent = function(event) {
+			console.log(event)
+			return $http.put('/api/events/' + event.id, {
+				id: event.id,
+				event_date: event.event_date,
+				start_time: event.start_time,
+				playing: event.playing,
+				description: event.description
+			
+				
 			});
 		};
 
@@ -163,7 +169,6 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 					$scope.events.splice($scope.events.indexOf(index), 1);
 				});
 		}
-
 	}
 ])
 
@@ -254,10 +259,10 @@ app.factory('EventsService', ['$http', function($http) {
 			return $http.post('/api/events', event)
 		},
 		editEvent: function(event) {
-			return $http.put('/api/events' + event.id, event)
+			return $http.put('/api/events/' + event.id, event)
 		},
 		deleteEvent: function(event) {
-			return $http.delete('/api/events' + event.id, event)
+			return $http.delete('/api/events/' + event.id, event)
 		}
 	}
 	return api

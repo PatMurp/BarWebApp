@@ -42,7 +42,10 @@
 				<tr><!-- enable event editing with xeditable library -->
 					<td><a href="#" editable-date="event.event_date" onbeforesave="updateEvent($data)">{{event.event_date | date:'dd-MMM-yyyy'}}</a></td>
 					<td><a href="#" editable-time="event.start_time" onbeforesave="updateEvent($data)">{{event.start_time | date: 'h:mma'}}</a></td>
-					<td><a href="#" editable-text="event.playing" onbeforesave="updateEvent($data)">{{event.playing}}</a></td>
+
+					<td><a href="#" editable-text="event.playing" onbeforesave="updateEvent(event)">{{event.playing}}</a></td>
+
+
 					<td><a href="#" editable-textarea="event.description" onbeforesave="updateEvent($data)">{{event.description}}</a></td>
 					<td><a ng-really-message="Are you sure" ng-really-click="removeEvent(event)" class="error">Delete</a></td>
 				</tr>

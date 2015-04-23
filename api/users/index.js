@@ -1,8 +1,7 @@
 var express = require('express');
-var controller = require('./events.controller');
+var controller = require('./users.controller');
 
 var router = express.Router();
-
 router.get('/', controller.index);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
