@@ -25,21 +25,35 @@ exports.create = function(req, res) {
 
 // update an existing event in datastore
 exports.update = function(req, res) {
-	var index = _.findIndex(datastore.events,
-		function(event) {
-			return event.id == req.params.id;
-		});
-	if (index != -1) {
-		var event = datastore.events[index]
+	Event.findById(req.params.id, function (err, event) {
 		event.event_date = req.body.event_date
 		event.start_time = req.body.start_time
 		event.playing = req.body.playing
 		event.description = req.body.description
-		return res.send(200, event)
-	} else {
-		return res.send(404)
-	}
+		event.save(function (err) {
+			if(err) {return handleError(res, err);}
+			return res.send(200, "Update seccessfull");
+		});
+	});
 };
+
+
+// exports.update = function(req, res) {
+// 	var index = _.findIndex(datastore.events,
+// 		function(event) {
+// 			return event.id == req.params.id;
+// 		});
+// 	if (index != -1) {
+// 		var event = datastore.events[index]
+// 		event.event_date = req.body.event_date
+// 		event.start_time = req.body.start_time
+// 		event.playing = req.body.playing
+// 		event.description = req.body.description
+// 		return res.send(200, event)
+// 	} else {
+// 		return res.send(404)
+// 	}
+// };
 
 // delete an event from datastore
 exports.destroy = function (req, res) {

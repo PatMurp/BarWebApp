@@ -145,9 +145,7 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 
 		// use api and xeditable onaftersave to edit 
 		$scope.updateEvent = function(event) {
-			console.log(event)
 			return $http.put('api/events/' + event._id, {
-				_id: event._id,
 				event_date: event.event_date,
 				start_time: event.start_time,
 				playing: event.playing,
