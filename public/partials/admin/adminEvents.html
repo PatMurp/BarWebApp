@@ -39,7 +39,7 @@
 				</tr>
 			</thead><!-- reverse order of events, added events appear at top -->
 			<tbody ng-repeat="event in events | reverse"{{event.playing}}>
-				<tr><!-- enable event editing with xeditable library -->
+				<tr><!-- enable event editing with xeditable library, onaftersave use events API -->
 					<td><a href="#" editable-date="event.event_date" onaftersave="updateEvent(event)">{{event.event_date | date:'dd-MMM-yyyy'}}</a></td>
 					<td><a href="#" editable-time="event.start_time" onaftersave="updateEvent(event)">{{event.start_time | date: 'h:mma'}}</a></td>
 					<td><a href="#" editable-text="event.playing" onaftersave="updateEvent(event)">{{event.playing}}</a></td>
