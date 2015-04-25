@@ -38,32 +38,12 @@ exports.update = function(req, res) {
 };
 
 
-// exports.update = function(req, res) {
-// 	var index = _.findIndex(datastore.events,
-// 		function(event) {
-// 			return event.id == req.params.id;
-// 		});
-// 	if (index != -1) {
-// 		var event = datastore.events[index]
-// 		event.event_date = req.body.event_date
-// 		event.start_time = req.body.start_time
-// 		event.playing = req.body.playing
-// 		event.description = req.body.description
-// 		return res.send(200, event)
-// 	} else {
-// 		return res.send(404)
-// 	}
-// };
-
 // delete an event from datastore
-exports.destroy = function (req, res) {
-	var elements = _.remove(datastore.events,
-		function(event) {
-			return event.id == req.params.id;
-		});
-	if (elements.length == 1) {
-		return res.send(200);
-	} else {
-		return res.send(404)
-	}
+exports.destroy = function(req, res) {
+  Event.findById(req.params.id, function (err, event) {
+    event.remove(function (err) {
+      if(err) {return handleError(res, err);}
+      return res.send(200, 'Deleted');
+    });
+  });
 };
