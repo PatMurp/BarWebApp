@@ -143,24 +143,19 @@ app.controller('AdminEventsCtrl', ['$scope', 'EventsService', '$http',
 				});
 		}
 
-		//onbeforesave xeditable
+
+
+		// use api and xeditable onaftersave to edit 
 		$scope.updateEvent = function(event) {
 			console.log(event)
-			return $http.put('/api/events/' + event.id, {
+			return $http.put('api/events/' + event.id, {
 				id: event.id,
 				event_date: event.event_date,
 				start_time: event.start_time,
 				playing: event.playing,
 				description: event.description
-			
-				
 			});
-		};
-
-		// onaftersave xeditable
-		// $scope.updateEvent = function() {
-		// 	return $http.post('api/events/' + $scope.events.id, $scope.events)
-		// }
+		}
 
 		// use api to delete events
 		$scope.removeEvent = function(index) {
