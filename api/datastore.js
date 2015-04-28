@@ -17,7 +17,7 @@ exports.events = [{
 }]
 
 exports.users = [{
-	id: '1',
+	id: 1,
 	first_name: 'Pat',
 	last_name: 'Jones',
 	user_name: 'pat',
@@ -25,7 +25,7 @@ exports.users = [{
 }]
 
 exports.menus = [{
-	id: '1',
+	
 	starters: [{
 		id: '1',
 		name: 'Wild Turnip',
@@ -42,7 +42,7 @@ exports.menus = [{
 		description: 'Freshly made vegetable based soups, please ask your server for today’s creation!',
 		price: '€5.50'
 	}],
-	id: '2',
+	
 	mains: [{
 		id: '1',
 		name: 'Lamb Stew',
@@ -59,7 +59,7 @@ exports.menus = [{
 		description: 'Roast Beef or Ham, Cheese, chutney, homemade coleslaw & homemade bread.',
 		price: '€9.95'
 	}],
-	id: '3',
+
 	deserts: [{
 		id: '1',
 		name: 'Homemade Ice Cream',
@@ -71,7 +71,7 @@ exports.menus = [{
 		description: 'Our cook selects from a range of fresh seasonal ingredients.',
 		price: '€4.50'
 	}],
-	id: '4',
+
 	wines: [{
 		id: '1',
 		name: 'Esperanza Verdejo Viura  -  Rueda',

@@ -23,7 +23,7 @@ exports.create = function(req, res) {
 	});
 }
 
-// update an existing event in datastore
+// update an existing event in mongo db
 exports.update = function(req, res) {
 	Event.findById(req.params.id, function (err, event) {
 		event.event_date = req.body.event_date
@@ -38,7 +38,7 @@ exports.update = function(req, res) {
 };
 
 
-// delete an event from datastore
+// delete an event from mongo db
 exports.destroy = function(req, res) {
   Event.findById(req.params.id, function (err, event) {
     event.remove(function (err) {
