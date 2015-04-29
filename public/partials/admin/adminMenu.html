@@ -31,9 +31,9 @@
 
 								<!-- Edit starters -->
 								<tr>
-									<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
-									<td><a href="#" editable-textarea="item.description">{{item.description}}</a></td>
-									<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+									<td><a href="#" editable-text="item.name" onaftersave="updateStarter(item)">{{item.name}}</a></td>
+									<td><a href="#" editable-textarea="item.description" onaftersave="updateStarter(item)">{{item.description}}</a></td>
+									<td><a href="#" editable-text="item.price" onaftersave="updateStarter(item)">{{item.price}}</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -73,9 +73,9 @@
 
 						<!-- Edit mains -->
 						<tr>
-							<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
-							<td><a href="#" editable-textarea="item.description">{{item.description}}</a></td>
-							<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+							<td><a href="#" editable-text="item.name" onaftersave="updateMain(item)">{{item.name}}</a></td>
+							<td><a href="#" editable-textarea="item.description" onaftersave="updateMain(item)">{{item.description}}</a></td>
+							<td><a href="#" editable-text="item.price" onaftersave="updateMain(item)">{{item.price}}</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -116,9 +116,9 @@
 
 						<!-- Edit deserts -->
 						<tr>
-							<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
-							<td><a href="#" editable-textarea="item.description">{{item.description}}</a></td>
-							<td><a href="#" editable-text="item.price">{{item.price}}</a></td>
+							<td><a href="#" editable-text="item.name" onaftersave="updateDesert(item)">{{item.name}}</a></td>
+							<td><a href="#" editable-textarea="item.description" onaftersave="updateDesert(item)">{{item.description}}</a></td>
+							<td><a href="#" editable-text="item.price" onaftersave="updateDesert(item)">{{item.price}}</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -159,9 +159,9 @@
 
 						<!-- Edit wines -->
 						<tr>
-							<td><a href="#" editable-text="item.name">{{item.name}}</a></td>
-							<td><a href="#" editable-textarea="item.description">{{item.description}}</a></td>
-							<td><a href="#" editable-textarea="item.price">{{item.price}}</a></td>
+							<td><a href="#" editable-textarea="item.name" onaftersave="updateWine(item)">{{item.name}}</a></td>
+							<td><a href="#" editable-textarea="item.description" onaftersave="updateWine(item)">{{item.description}}</a></td>
+							<td><a href="#" editable-textarea="item.price" onaftersave="updateWine(item)">{{item.price}}</a></td>
 						</tr>
 					</tbody>
 				</table>

@@ -113,10 +113,49 @@ app.controller('EventsCtrl', [
 app.controller('AdminMenuCtrl', [
 	'$scope', '$http',
 	function($scope, $http) {
+
 		// use api to display menus
 		$http.get('/api/menus').success(function(menus) {
 			$scope.foodMenus = menus;
 		});
+
+		// use api and xeditable onaftersave to edit starters
+		$scope.updateStarter = function(starter) {
+			return $http.put('api/menus/starters/' + starter.id, {
+				name: starter.name,
+				description: starter.description,
+				price: starter.price
+			});
+		}
+
+		// use api and xeditable onaftersave to edit mains
+		$scope.updateMain = function(main) {
+			return $http.put('api/menus/mains/' + main.id, {
+				name: main.name,
+				description: main.description,
+				price: main.price
+			});
+		}
+
+		// use api and xeditable onaftersave to edit deserts
+		$scope.updateDesert = function(desert) {
+			return $http.put('api/menus/deserts/' + desert.id, {
+				name: desert.name,
+				description: desert.description,
+				price: desert.price
+			});
+		}
+
+		// use api and xeditable onaftersave to edit wines
+		$scope.updateWine = function(wine) {
+			console.log(wine)
+			return $http.put('api/menus/wines/' + wine.id, {
+				name: wine.name,
+				description: wine.description,
+				price: wine.price
+			});
+		}
+
 	}
 ]);
 
