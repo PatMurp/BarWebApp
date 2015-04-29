@@ -114,4 +114,15 @@ exports.updateWine = function(req, res) {
 	}
 };
 
-
+// delete a starter from datastore
+exports.destroyStarter = function(req, res) {
+	var elements = _.remove(datastore.menus[0].starters,
+		function(starter) {
+			return starter.id == req.params.id;
+		});
+	if (elements.length == 1) {
+		return res.send(200);
+	} else {
+		return res.send(404)
+	}
+};

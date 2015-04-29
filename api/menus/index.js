@@ -10,6 +10,7 @@ router.get('/deserts', controller.showDeserts);
 router.get('/wines', controller.showWines);
 
 router.post('/starters', controller.createStarter);
+router.delete('/starters/:id', controller.destroyStarter);
 
 router.put('/starters/:id', controller.updateStarter);
 router.put('/mains/:id', controller.updateMain);
