@@ -22,3 +22,23 @@ exports.showWines = function(req, res) {
   return res.json(200, datastore.menus[0].wines);
 }
 
+exports.createStarter = function(req, res) {
+    var nextId = 0
+    var last = _.last(datastore.menus[0].starters)
+    if (last != undefined) {
+       nextId = last.id + 1
+    } else {
+      nextId = 1
+    }
+    console.log(req.body)
+    var starter = {
+       id: nextId,
+       name: req.body.name,
+       description: req.body.description,
+       price: req.body.price 
+    };
+    datastore.menus[0].starters.push(starter)
+    return res.json(201, starter);
+};
+
+
