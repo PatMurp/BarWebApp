@@ -13,11 +13,16 @@ Web App developed for a bar; logged in admin user can edit content.
 
 ### Admin User Features
 
-* Register user at: .../MurphysBarApp/#/register
-* When logged in admin users can be added or deleted
+* Additional nav bar links when logged in
+* Add new admin user
 * In place edting of events and food menu
 * Accordion layout for editing food menus
 * Add or delete events
 
 !!! Server side code to follow !!!  
-[Demo](https://bardemo.herokuapp.com/) site still under construction !!!
+[Demo](https://bardemo.herokuapp.com/) available, For admin access log in with: 
+ 
+email: d@d.com  
+password: ademo 
+
+!!! site still under construction !!!

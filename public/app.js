@@ -44,7 +44,7 @@ app.config(['$routeProvider', function($routeProvider) {
 			controller: 'AdminMenuCtrl'
 		})
 		.otherwise({
-			redirectTo: '/login'
+			redirectTo: '/home'
 		})
 }])
 
