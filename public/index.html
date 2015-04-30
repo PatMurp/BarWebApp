@@ -26,20 +26,22 @@
 	     <section class="top-bar-section">
 	       <ul class="right">
 	         <li class="divider"></li>
-	         <li><a href="#/home">Home</a></li>
+	         <li class-on-active-link="active"><a href="#/home">Home</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/menu">Food Menu</a></li>
+	         <li class-on-active-link="active"><a href="#/menu">Food Menu</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/events">Events Guide</a></li>
+	         <li class-on-active-link="active"><a href="#/events">Events Guide</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/gallery">Photo Gallery</a></li>
+	         <li class-on-active-link="active"><a href="#/gallery">Photo Gallery</a></li>
 	         <li class="divider"></li>
-	         <li><a href="#/login" ng-show="!user.authenticated">Admin</a></li>
+	         <li class-on-active-link="active"><a href="#/login" ng-show="!user.authenticated">Admin</a></li>
 
 	         <!-- display when admin user logged in only -->
-	         <li><a href="#/admin/events" ng-show="user.authenticated">Add/edit events</a></li>
+	         <li class-on-active-link="active"><a href="#/admin/events" ng-show="user.authenticated">Add/edit events</a></li>
 	         <li class="divider" ng-show="user.authenticated"></li>
-	         <li><a href="#/admin/editMenu" ng-show="user.authenticated">Edit Menus</a></li>
+	         <li class-on-active-link="active"><a href="#/admin/editMenu" ng-show="user.authenticated">Edit Menus</a></li>
+	         <li class="divider" ng-show="user.authenticated"></li>
+	         <li class-on-active-link="active"><a href="#/signup" ng-show="user.authenticated">Add Admin User</a></li>
 	         <li class="divider" ng-show="user.authenticated"></li>
 	         <li><a href="#" ng-show="user.authenticated" ua-logout>Log Out</a></li>
 	       </ul>

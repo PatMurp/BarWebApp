@@ -1,18 +1,5 @@
 <div class="row"><br>
-	<div class="medium-2 columns">
-		<ul class="side-nav" id="sideNav">
-			<h5 id="foodName" class="text-center">Admin Links</h5>
-		  <li><a href="#/adminLogin"
-		  	class="button alert border-radius-bottom-margin small">Logout</a></li>
-		  <li class="divider"></li>
-		  <li><a href="#/admin/home">Admin Home</a></li>
-		  <li class="divider"></li>
-		  <li><a href="#/admin/editMenu">Edit Menus</a></li>
-		  <li class="divider"></li>
-		  <li class="active"><a href="#/admin/events">Add/edit events</a></li>
-		</ul>
-	</div>
-	<div class="medium-4 medium-offset-2 columns">
+	<div class="medium-4 columns">
 		<h4 class="text-center">Add new Event</h4>
 		<form name="eventForm" id="eventForm" ng-submit="addEvent()">
 			<input type="date" ng-model="newEvent.event_date" placeholder="Event date: e.g. 15-Mar-2015"  name="date" required>
@@ -24,11 +11,10 @@
 	</div>
 	<div class="medium-4 columns">
 	</div>
-</div>
-<div class="row">
-	<div class="medium-9 columns">
+
+	<div class="medium-8 columns">
 		<table>
-			<caption>Edit events</caption>
+			<h4 class="text-center">Edit events</h4>
 			<thead>
 				<tr>
 					<th>Date</th>
