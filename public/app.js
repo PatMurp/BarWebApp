@@ -1,87 +1,66 @@
-var app = angular.module("barApp", ['xeditable', 'angAccordion', 'ui.router', 'ngCookies', 'ngAnimate'])
-	.config(config)
-	.run(run);
+var app = angular.module("barApp", ['xeditable', 'angAccordion', 'ngRoute', 'ngCookies', 'ngAnimate', 'UserApp'])
 
-config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider'];
 
-function config($stateProvider, $locationProvider, $urlRouterProvider) {
-
-	$urlRouterProvider.otherwise('/home')
-
-	$stateProvider
-		.state('home', {
-			url: '/home',
+app.config(['$routeProvider', function($routeProvider) {
+	$routeProvider
+		.when('/home', {
 			templateUrl: 'partials/home.html',
-			controller: 'HomePageCtrl'
+			controller: 'HomePageCtrl',
+			public: true
 		})
-		.state('menu', {
-			url: '/menu',
+		.when('/menu', {
 			templateUrl: 'partials/menu.html',
-			controller: 'MenuCtrl'
+			controller: 'MenuCtrl',
+			public: true
 		})
-		.state('events', {
-			url: '/events',
+		.when('/events', {
 			templateUrl: 'partials/events.html',
-			controller: 'EventsCtrl'
+			controller: 'EventsCtrl',
+			public: true
 		})
-		.state('gallery', {
-			url: '/gallery',
+		.when('/gallery', {
 			templateUrl: 'partials/gallery.html',
-			controller: 'GalleryCtrl'
+			controller: 'GalleryCtrl',
+			public: true
 		})
-		.state('adminLogin', {
-			url: '/adminLogin',
+		.when('/login', {
 			templateUrl: 'partials/admin/login.html',
-			controller: 'LoginController',
-			controllerAs: 'vm'
+			public: true,
+			login: true
 		})
-		.state('adminHome', {
-			url: '/admin/home',
+		.when('/adminHome', {
 			templateUrl: 'partials/admin/home.html',
-			controller: 'HomeController',
-			controllerAs: 'vm'
+			controller: 'HomeController'
 		})
-		.state('register', {
-			url: '/register',
+		.when('/signup', {
 			templateUrl: 'partials/admin/register.html',
-			controller: 'RegisterController',
-			controllerAs: 'vm'
+			public: true
 		})
-		.state('adminMenu', {
-			url: '/admin/editMenu',
+		.when('/admin/events', {
+			templateUrl: 'partials/admin/adminEvents.html',
+			controller: 'AdminEventsCtrl'
+		})
+		.when('/admin/editMenu', {
 			templateUrl: 'partials/admin/adminMenu.html',
 			controller: 'AdminMenuCtrl'
 		})
-		.state('adminEvents', {
-			url: '/admin/events',
-			templateUrl: 'partials/admin/adminEvents.html',
-			controller: 'AdminEventsCtrl',
-			controllerAs: 'vm'
+		.otherwise({
+			redirectTo: '/login'
 		})
-}
+}])
 
-run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
+app.run(function(user) {
+	user.init({ appId: '554155f33bbb3' }); // UserApp.io id
+	
+});
 
-function run($rootScope, $location, $cookieStore, $http) {
-	// keep user logged in after page refresh
-	$rootScope.globals = $cookieStore.get('globals') || {};
-	if ($rootScope.globals.currentUser) {
-		$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-	}
-
-	$rootScope.$on('$locationChangeStart', function(event, next, current) {
-		// redirect to login page if not logged in and trying to access a restricted page
-		var restrictedPage = $.inArray($location.path(), [
-			'/login', '/register', '/adminLogin', '/home', '/menu', '/events', '/gallery'
-		]) === -1;
-		var loggedIn = $rootScope.globals.currentUser;
-		if (restrictedPage && !loggedIn) {
-			$location.path('/home');
-		}
-	});
-}
 
 app.controller('HomePageCtrl', function($scope) {})
+
+app.controller('HomeController', function($scope) {})
+
+
+
 
 
 
