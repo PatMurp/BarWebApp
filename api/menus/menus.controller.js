@@ -1,29 +1,51 @@
 var _ = require('lodash')
 var datastore = require('../datastore');
+var Menu = require('./menu.model')
 
-// get list of menus
+function handleError(res, err) {
+	return res.send(500, err);
+}
+
+// get all menu items from mongo db
 exports.index = function(req, res) {
-	return res.json(200, datastore.menus);
-};
+	Menu.find(function(err, menus) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, menus);
+	});
+}
 
-// get list of starters
+// get starters from mongo db
 exports.showStarters = function(req, res) {
-	return res.json(200, datastore.menus[0].starters);
+	Menu.find(function(err, menus) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, menus[0].starters);
+	});
 }
 
-// get list of mains
+// get mains from mongo db
 exports.showMains = function(req, res) {
-  return res.json(200, datastore.menus[0].mains);
+	Menu.find(function(err, menus) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, menus[0].mains);
+	});
 }
 
-// get list of deserts
+
+// get deserts from mongo db
 exports.showDeserts = function(req, res) {
-  return res.json(200, datastore.menus[0].deserts);
+	Menu.find(function(err, menus) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, menus[0].deserts);
+	});
 }
 
-// get list of wines
+
+// get wines from mongo db
 exports.showWines = function(req, res) {
-  return res.json(200, datastore.menus[0].wines);
+	Menu.find(function(err, menus) {
+		if(err) { return handleError(res, err); }
+		return res.json(200, menus[0].wines);
+	});
 }
 
 // create new starter in datastore
