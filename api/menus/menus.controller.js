@@ -9,7 +9,9 @@ function handleError(res, err) {
 // get all menu items from mongo db
 exports.index = function(req, res) {
 	Menu.find(function(err, menus) {
-		if(err) { return handleError(res, err); }
+		if (err) {
+			return handleError(res, err);
+		}
 		return res.json(200, menus);
 	});
 }
@@ -17,7 +19,9 @@ exports.index = function(req, res) {
 // get starters from mongo db
 exports.showStarters = function(req, res) {
 	Menu.find(function(err, menus) {
-		if(err) { return handleError(res, err); }
+		if (err) {
+			return handleError(res, err);
+		}
 		return res.json(200, menus[0].starters);
 	});
 }
@@ -25,7 +29,9 @@ exports.showStarters = function(req, res) {
 // get mains from mongo db
 exports.showMains = function(req, res) {
 	Menu.find(function(err, menus) {
-		if(err) { return handleError(res, err); }
+		if (err) {
+			return handleError(res, err);
+		}
 		return res.json(200, menus[0].mains);
 	});
 }
@@ -34,7 +40,9 @@ exports.showMains = function(req, res) {
 // get deserts from mongo db
 exports.showDeserts = function(req, res) {
 	Menu.find(function(err, menus) {
-		if(err) { return handleError(res, err); }
+		if (err) {
+			return handleError(res, err);
+		}
 		return res.json(200, menus[0].deserts);
 	});
 }
@@ -43,30 +51,33 @@ exports.showDeserts = function(req, res) {
 // get wines from mongo db
 exports.showWines = function(req, res) {
 	Menu.find(function(err, menus) {
-		if(err) { return handleError(res, err); }
+		if (err) {
+			return handleError(res, err);
+		}
 		return res.json(200, menus[0].wines);
 	});
 }
 
-// create new starter in datastore
+// add starter to mongo db sub document
 exports.createStarter = function(req, res) {
-    var nextId = 0
-    var last = _.last(datastore.menus[0].starters)
-    if (last != undefined) {
-       nextId = last.id + 1
-    } else {
-      nextId = 1
-    }
-    console.log(req.body)
-    var starter = {
-       id: nextId,
-       name: req.body.name,
-       description: req.body.description,
-       price: req.body.price 
-    };
-    datastore.menus[0].starters.push(starter)
-    return res.json(201, starter);
-};
+	var starter = {
+		name: req.body.name,
+		description: req.body.description,
+		price: req.body.price
+	}
+	Menu.update({
+			 push: {
+				starters: starter
+			}
+		},
+		function(err) {
+			if (err) {
+				return handleError(res, err);
+			}
+			return res.json(201, starter);
+		});
+}
+
 
 // update existing starter in datastore
 exports.updateStarter = function(req, res) {
@@ -85,7 +96,7 @@ exports.updateStarter = function(req, res) {
 	}
 };
 
-// update existing starter in datastore
+// update existing mains in datastore
 exports.updateMain = function(req, res) {
 	var index = _.findIndex(datastore.menus[0].mains,
 		function(main) {
