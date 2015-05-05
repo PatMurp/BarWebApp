@@ -28,10 +28,6 @@ app.config(['$routeProvider', function($routeProvider) {
 			public: true,
 			login: true
 		})
-		.when('/adminHome', {
-			templateUrl: 'partials/admin/home.html',
-			controller: 'HomeController'
-		})
 		.when('/signup', {
 			templateUrl: 'partials/admin/register.html'
 		})
@@ -55,12 +51,6 @@ app.run(function(user) {
 
 
 app.controller('HomePageCtrl', function($scope) {})
-
-app.controller('HomeController', function($scope) {})
-
-
-
-
 
 
 app.controller('MenuCtrl', [

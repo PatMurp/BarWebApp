@@ -6,78 +6,134 @@ function handleError(res, err) {
 	return res.send(500, err);
 }
 
-// get all menu items from mongo db
+// comment out code below  and uncomment next section to view
+// partial mongoose API implementation
+//*********************************************************************
+
+// get all menu items from datastore
 exports.index = function(req, res) {
-	Menu.find(function(err, menus) {
-		if (err) {
-			return handleError(res, err);
-		}
-		return res.json(200, menus);
-	});
-}
+	return res.json(200, datastore.menus);
+};
 
-// get starters from mongo db
+// get list of starters from datastre
 exports.showStarters = function(req, res) {
-	Menu.find(function(err, menus) {
-		if (err) {
-			return handleError(res, err);
-		}
-		return res.json(200, menus[0].starters);
-	});
+	return res.json(200, datastore.menus[0].starters);
 }
 
-// get mains from mongo db
+// get list of mains from datastore
 exports.showMains = function(req, res) {
-	Menu.find(function(err, menus) {
-		if (err) {
-			return handleError(res, err);
-		}
-		return res.json(200, menus[0].mains);
-	});
+  return res.json(200, datastore.menus[0].mains);
 }
 
-
-// get deserts from mongo db
+// get list of deserts from datastore
 exports.showDeserts = function(req, res) {
-	Menu.find(function(err, menus) {
-		if (err) {
-			return handleError(res, err);
-		}
-		return res.json(200, menus[0].deserts);
-	});
+  return res.json(200, datastore.menus[0].deserts);
 }
 
-
-// get wines from mongo db
+// get list of wines from datastore
 exports.showWines = function(req, res) {
-	Menu.find(function(err, menus) {
-		if (err) {
-			return handleError(res, err);
-		}
-		return res.json(200, menus[0].wines);
-	});
+  return res.json(200, datastore.menus[0].wines);
 }
 
-// add starter to mongo db sub document
+// create new starter in datastore
 exports.createStarter = function(req, res) {
-	var starter = {
-		name: req.body.name,
-		description: req.body.description,
-		price: req.body.price
-	}
-	Menu.update({
-			 push: {
-				starters: starter
-			}
-		},
-		function(err) {
-			if (err) {
-				return handleError(res, err);
-			}
-			return res.json(201, starter);
-		});
-}
+    var nextId = 0
+    var last = _.last(datastore.menus[0].starters)
+    if (last != undefined) {
+       nextId = last.id + 1
+    } else {
+      nextId = 1
+    }
+    console.log(req.body)
+    var starter = {
+       id: nextId,
+       name: req.body.name,
+       description: req.body.description,
+       price: req.body.price 
+    };
+    datastore.menus[0].starters.push(starter)
+    return res.json(201, starter);
+};
 
+//*********************************************************************
+
+// Mongoose partial implementation
+
+// // get all menu items from mongo db
+// exports.index = function(req, res) {
+// 	Menu.find(function(err, menus) {
+// 		if (err) {
+// 			return handleError(res, err);
+// 		}
+// 		return res.json(200, menus);
+// 	});
+// }
+
+// // get starters from mongo db
+// exports.showStarters = function(req, res) {
+// 	Menu.find(function(err, menus) {
+// 		if (err) {
+// 			return handleError(res, err);
+// 		}
+// 		return res.json(200, menus[0].starters);
+// 	});
+// }
+
+// // get mains from mongo db
+// exports.showMains = function(req, res) {
+// 	Menu.find(function(err, menus) {
+// 		if (err) {
+// 			return handleError(res, err);
+// 		}
+// 		return res.json(200, menus[0].mains);
+// 	});
+// }
+
+
+// // get deserts from mongo db
+// exports.showDeserts = function(req, res) {
+// 	Menu.find(function(err, menus) {
+// 		if (err) {
+// 			return handleError(res, err);
+// 		}
+// 		return res.json(200, menus[0].deserts);
+// 	});
+// }
+
+
+// // get wines from mongo db
+// exports.showWines = function(req, res) {
+// 	Menu.find(function(err, menus) {
+// 		if (err) {
+// 			return handleError(res, err);
+// 		}
+// 		return res.json(200, menus[0].wines);
+// 	});
+// }
+
+// // add starter to mongo db sub document
+// exports.createStarter = function(req, res) {
+// 	var starter = {
+// 		name: req.body.name,
+// 		description: req.body.description,
+// 		price: req.body.price
+// 	}
+// 	Menu.update({
+// 			 push: {
+// 				starters: starter
+// 			}
+// 		},
+// 		function(err) {
+// 			if (err) {
+// 				return handleError(res, err);
+// 			}
+// 			return res.json(201, starter);
+// 		});
+// }
+
+//*********************************************************************
+
+// Implemented for datastore only don't comment out
 
 // update existing starter in datastore
 exports.updateStarter = function(req, res) {
@@ -96,7 +152,7 @@ exports.updateStarter = function(req, res) {
 	}
 };
 
-// update existing mains in datastore
+// update existing starter in datastore
 exports.updateMain = function(req, res) {
 	var index = _.findIndex(datastore.menus[0].mains,
 		function(main) {
